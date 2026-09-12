@@ -7,14 +7,6 @@
 (function () {
   'use strict';
 
-  var LANG_KEY = 'wedding-lang';
-  var lang = WEDDING.language.default === 'hi' ? 'hi' : 'en';
-
-  try {
-    var saved = localStorage.getItem(LANG_KEY);
-    if (saved === 'en' || saved === 'hi') lang = saved;
-  } catch (e) { /* private mode - ignore */ }
-
   var $  = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
@@ -25,11 +17,9 @@
     }, WEDDING);
   }
 
-  /* ---------- pick the current language out of {en,hi} ---------- */
+  /* ---------- a missing value renders as empty, never "undefined" ---------- */
   function t(v) {
-    if (v == null) return '';
-    if (typeof v === 'object') return v[lang] || v.en || '';
-    return String(v);
+    return (v == null) ? '' : String(v);
   }
 
 
@@ -38,8 +28,6 @@
      ============================================================ */
 
   function render() {
-    document.documentElement.lang = lang;
-
     /* --- document title + link preview --- */
     var title = t(WEDDING.site.title);
     var desc  = t(WEDDING.site.description);
@@ -81,10 +69,6 @@
       sign = t(WEDDING.couple.groom.name) + '  &  ' + t(WEDDING.couple.bride.name);
     }
     $('#closingSign').textContent = sign;
-
-    /* --- language toggle label --- */
-    var lbl = $('#langLabel');
-    if (lbl) lbl.textContent = WEDDING.language.labels[lang] || '';
   }
 
   function renderTimeline() {
@@ -228,24 +212,6 @@
     if (musicOn) { audio.pause(); setMusicIcon(false); }
     else { audio.play().then(function(){ setMusicIcon(true); }).catch(function(){}); }
   });
-
-
-  /* ============================================================
-     LANGUAGE TOGGLE
-     ============================================================ */
-
-  var langBtn = $('#langBtn');
-
-  if (WEDDING.language.enabled) {
-    langBtn.hidden = false;
-    langBtn.addEventListener('click', function () {
-      lang = (lang === 'en') ? 'hi' : 'en';
-      try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
-      render();
-    });
-  } else {
-    langBtn.hidden = true;
-  }
 
 
   /* ============================================================

@@ -19,16 +19,9 @@
 
   --script:'Great Vibes', cursive;
   --serif:'Cormorant Garamond', Georgia, serif;
-  --deva:'Noto Serif Devanagari', serif;
 
   --shadow-soft:0 10px 30px rgba(107,20,33,.10);
   --shadow-card:0 18px 50px rgba(74,52,55,.18);
-}
-
-/* ---- Hindi mode swaps the fonts ---- */
-html[lang="hi"]{
-  --script:var(--deva);
-  --serif:var(--deva);
 }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -185,7 +178,6 @@ h1,h2,h3,p{margin:0}
   text-shadow:0 1px 0 rgba(255,255,255,.35);
   pointer-events:none;
 }
-html[lang="hi"] .seal-text{ font-size:12px }
 .seal:active{ transform:translate(-50%,-50%) scale(.94) }
 .envelope.open .seal{ transform:translate(-50%,-50%) scale(0) rotate(45deg); opacity:0; animation:none }
 
@@ -200,7 +192,6 @@ html[lang="hi"] .seal-text{ font-size:12px }
   color:var(--maroon); opacity:.75;
   transition:opacity .4s;
 }
-html[lang="hi"] .env-caption{ letter-spacing:.12em; font-size:12px }
 .env-caption-line{ width:34px; height:1px; background:currentColor; opacity:.5 }
 .envelope-screen.opening .env-caption{ opacity:0 }
 
@@ -245,11 +236,6 @@ body.opened .ctrl{ opacity:1; transform:none; pointer-events:auto }
 .ctrl-sound.muted .ic-on{display:none}
 .ctrl-sound.muted .ic-off{display:block}
 
-.ctrl-lang{
-  bottom:max(16px, env(safe-area-inset-bottom)); left:14px;
-  height:38px; padding:0 15px 0 12px;
-  font-family:var(--serif); font-size:13px; letter-spacing:.04em;
-}
 
 /* ============================================================
    3. FALLING PETALS
@@ -290,7 +276,6 @@ body.opened .invite{ opacity:1 }
   line-height:1.25;
   margin-bottom:8px;
 }
-html[lang="hi"] .sec-title{ font-size:clamp(22px,6.2vw,30px); font-weight:500 }
 
 .sec-title::after{
   content:'';
@@ -375,7 +360,6 @@ html[lang="hi"] .sec-title{ font-size:clamp(22px,6.2vw,30px); font-weight:500 }
   white-space:pre-line;
   line-height:1.7;
 }
-html[lang="hi"] .hero-welcome{ font-style:normal; font-size:14px }
 
 .orn-rule{
   display:flex; align-items:center; justify-content:center; gap:9px;
@@ -397,7 +381,6 @@ html[lang="hi"] .hero-welcome{ font-style:normal; font-size:14px }
   text-shadow:0 2px 20px rgba(255,225,215,.45), 0 1px 2px rgba(0,0,0,.3);
   margin:6px 0 8px;
 }
-html[lang="hi"] .name-script{ font-size:clamp(32px,9vw,44px); font-weight:500; line-height:1.3 }
 
 .name-meta{ display:grid; gap:1px }
 .name-meta span{
@@ -410,7 +393,6 @@ html[lang="hi"] .name-script{ font-size:clamp(32px,9vw,44px); font-weight:500; l
   font-size:26px; color:#EBC9A6;
   margin:16px 0 10px;
 }
-html[lang="hi"] .amp{ font-family:var(--script) }
 
 .scroll-cue{
   position:absolute; bottom:26px; left:0; right:0;
@@ -419,7 +401,6 @@ html[lang="hi"] .amp{ font-family:var(--script) }
   font-size:9.5px; letter-spacing:.36em; text-transform:uppercase;
   animation:bob 2s ease-in-out infinite;
 }
-html[lang="hi"] .scroll-cue{ letter-spacing:.1em; font-size:11px }
 .scroll-cue svg{ width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.6 }
 @keyframes bob{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
 
@@ -454,7 +435,6 @@ html[lang="hi"] .scroll-cue{ letter-spacing:.1em; font-size:11px }
 .scratch-date{ font-family:var(--serif); font-size:19px; font-weight:600; color:var(--maroon) !important }
 .scratch-day { font-size:12.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--muted) !important }
 .scratch-time{ font-size:12px; font-style:italic; color:var(--muted) !important }
-html[lang="hi"] .scratch-day{ letter-spacing:.06em; text-transform:none }
 
 .scratch-canvas{
   position:absolute; inset:0;
@@ -497,7 +477,6 @@ html[lang="hi"] .scratch-day{ letter-spacing:.06em; text-transform:none }
   font-size:10px !important; letter-spacing:.34em; text-transform:uppercase;
   color:var(--muted) !important;
 }
-html[lang="hi"] .forever-kicker{ letter-spacing:.08em; text-transform:none; font-size:12px !important }
 .forever-date{ font-size:17px !important; font-weight:600; color:var(--maroon) !important }
 .forever-day { font-size:11.5px !important; font-style:italic }
 
@@ -552,7 +531,6 @@ html[lang="hi"] .forever-kicker{ letter-spacing:.08em; text-transform:none; font
   font-size:8.5px; letter-spacing:.2em; text-transform:uppercase;
   color:var(--muted);
 }
-html[lang="hi"] .count-box span{ letter-spacing:.02em; text-transform:none; font-size:11px }
 
 .count-done{
   margin-top:24px !important;
@@ -585,7 +563,6 @@ html[lang="hi"] .count-box span{ letter-spacing:.02em; text-transform:none; font
 .tl-title{ font-size:16px; font-weight:600; color:var(--maroon) }
 .tl-when { font-size:12.5px; letter-spacing:.05em; color:var(--muted); margin-top:1px }
 .tl-note { font-size:13.5px; color:var(--muted); font-style:italic; margin-top:3px }
-html[lang="hi"] .tl-note{ font-style:normal }
 
 /* ============================================================
    11. VENUE
@@ -624,7 +601,6 @@ html[lang="hi"] .tl-note{ font-style:normal }
   font-family:var(--script); font-size:26px; font-weight:400;
   color:var(--maroon); margin-bottom:6px;
 }
-html[lang="hi"] .dress-col h3{ font-size:18px; font-weight:500 }
 .dress-col p{ font-size:13.5px !important }
 .dress-div{ width:1px; align-self:stretch; background:linear-gradient(180deg,transparent,var(--blush-3),transparent) }
 
@@ -651,10 +627,8 @@ html[lang="hi"] .dress-col h3{ font-size:18px; font-weight:500 }
   font-family:var(--script); font-size:27px; font-weight:400;
   color:var(--maroon); line-height:1.2;
 }
-html[lang="hi"] .ev-title{ font-size:19px; font-weight:500 }
 .ev-when { font-size:13px; letter-spacing:.05em; color:var(--muted); margin-top:4px }
 .ev-where{ font-size:13px; font-style:italic; color:var(--muted) }
-html[lang="hi"] .ev-where{ font-style:normal }
 
 /* ============================================================
    14. INFO CARDS
@@ -686,7 +660,6 @@ html[lang="hi"] .ev-where{ font-style:normal }
   line-height:1.3;
   white-space:pre-line;
 }
-html[lang="hi"] .closing-msg{ font-size:clamp(21px,6vw,27px); font-weight:500; line-height:1.6 }
 
 .closing-sign{
   margin-top:12px !important;
