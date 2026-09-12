@@ -192,6 +192,70 @@
 
 
   /* ============================================================
+     SAVE THE DATE
+     Builds a calendar file in the browser and hands it to the guest.
+     No server involved - the whole file is a few hundred bytes of text.
+     ============================================================ */
+
+  function initSaveDate() {
+    var btn = $('#saveDateBtn');
+    if (!btn) return;
+
+    var start = new Date(WEDDING.weddingDateTime);
+    if (isNaN(start.getTime())) { btn.hidden = true; return; }
+
+    /* iCalendar wants UTC as YYYYMMDDTHHMMSSZ */
+    function stamp(d) {
+      return d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+    }
+    /* Long values must be folded at 75 octets, and , ; \ are escaped. */
+    function esc(s) {
+      return String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;')
+                      .replace(/,/g, '\\,').replace(/\n/g, '\\n');
+    }
+
+    btn.addEventListener('click', function () {
+      var cal  = WEDDING.calendar || {};
+      var hours = Number(cal.hours) || 3;
+      var end  = new Date(start.getTime() + hours * 3600 * 1000);
+      var name = t(cal.title) ||
+                 (t(WEDDING.couple.groom.name) + ' & ' + t(WEDDING.couple.bride.name));
+
+      var lines = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//wedding-invitation//EN',
+        'CALSCALE:GREGORIAN',
+        'BEGIN:VEVENT',
+        'UID:' + start.getTime() + '@wedding-invitation',
+        'DTSTAMP:' + stamp(new Date()),
+        'DTSTART:' + stamp(start),
+        'DTEND:' + stamp(end),
+        'SUMMARY:' + esc(name),
+        'LOCATION:' + esc(t(cal.location) || t(WEDDING.venue.name)),
+        'DESCRIPTION:' + esc(t(WEDDING.site.description)),
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ];
+
+      var blob = new Blob([lines.join('\r\n')], { type: 'text/calendar;charset=utf-8' });
+      var url  = URL.createObjectURL(blob);
+      var a    = document.createElement('a');
+      a.href = url;
+      a.download = 'save-the-date.ics';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+
+      /* brief acknowledgement - the download itself is invisible on phones */
+      btn.classList.add('saved');
+      setTimeout(function () { btn.classList.remove('saved'); }, 2200);
+    });
+  }
+
+
+  /* ============================================================
      BACKGROUND MUSIC
      ============================================================ */
 
@@ -512,6 +576,7 @@
   document.body.classList.add('locked');
 
   render();
+  initSaveDate();
   initMusic();
   initPetals();
   initReveal();

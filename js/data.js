@@ -38,7 +38,7 @@ const WEDDING = {
     }
   },
 
-  /* ---------- 3. THE BIG DATE ----------
+  /* ---------- 4. THE BIG DATE ----------
      IMPORTANT: this ONE value drives the countdown timer.
      Format: YYYY-MM-DDTHH:MM:SS+05:30   (+05:30 = India Standard Time) */
   weddingDateTime: "2026-12-11T10:30:00+05:30",
@@ -48,19 +48,28 @@ const WEDDING = {
   weddingDayText:  "Friday",
   weddingTimeText: "10:30 AM onwards",
 
-  /* ---------- 4. SECTION: SCRATCH TO REVEAL ---------- */
-  scratch: {
-    heading: "Scratch to Reveal",
-    hint:    "Scratch the heart with your finger"
+  // Used for the "Save the Date" calendar file
+  calendar: {
+    title:    "Wedding of Ayush & Yashika",
+    hours:    4,
+    location: "Aloha on the Ganges, Rishikesh, Uttarakhand"
   },
 
-  /* ---------- 5. SECTION: OUR FOREVER BEGINS ---------- */
+  /* ---------- 5. SECTION: SCRATCH TO REVEAL ---------- */
+  scratch: {
+    heading: "Scratch to Reveal",
+    hint:    "Scratch the heart with your finger",
+    // Text on the button that saves the date to the guest's calendar
+    saveLabel: "SAVE THE DATE"
+  },
+
+  /* ---------- 6. SECTION: OUR FOREVER BEGINS ---------- */
   forever: {
     heading:  "Our forever begins",
     subtitle: "You Are Invited"
   },
 
-  /* ---------- 6. SECTION: PHOTO GALLERY ----------
+  /* ---------- 7. SECTION: PHOTO GALLERY ----------
      Drop your photos into  assets/images/  and list the filenames here.
      Leave the list empty  ( photos: [] )  to hide the gallery entirely. */
   gallery: {
@@ -72,13 +81,13 @@ const WEDDING = {
     ]
   },
 
-  /* ---------- 7. SECTION: COUNTDOWN ---------- */
+  /* ---------- 8. SECTION: COUNTDOWN ---------- */
   countdown: {
     heading:  "Counting Down to Forever",
     finished: "Today is the day!"
   },
 
-  /* ---------- 8. SECTION: PROGRAM TIMELINE ---------- */
+  /* ---------- 9. SECTION: PROGRAM TIMELINE ---------- */
   timeline: {
     heading: "Program Timeline",
     items: [
@@ -100,7 +109,7 @@ const WEDDING = {
     ]
   },
 
-  /* ---------- 9. SECTION: VENUE ---------- */
+  /* ---------- 10. SECTION: VENUE ---------- */
   venue: {
     heading: "Venue",
     name:    "Aloha on the Ganges",
@@ -110,7 +119,7 @@ const WEDDING = {
     mapsLabel: "View on Google Maps"
   },
 
-  /* ---------- 10. SECTION: DRESS CODE ----------
+  /* ---------- 11. SECTION: DRESS CODE ----------
      Set  show: false  to hide this whole section. */
   dressCode: {
     show: true,
@@ -125,7 +134,7 @@ const WEDDING = {
     }
   },
 
-  /* ---------- 11. SECTION: PRE-WEDDING EVENTS ----------
+  /* ---------- 12. SECTION: PRE-WEDDING EVENTS ----------
      Delete entries from  items  or set  show: false  to hide. */
   events: {
     show: true,
@@ -149,7 +158,7 @@ const WEDDING = {
     ]
   },
 
-  /* ---------- 12. SECTION: INFO CARDS ----------
+  /* ---------- 13. SECTION: INFO CARDS ----------
      Any card with  show: false  disappears from the page. */
   info: {
     transportation: {
@@ -169,14 +178,14 @@ const WEDDING = {
     }
   },
 
-  /* ---------- 13. CLOSING ---------- */
+  /* ---------- 14. CLOSING ---------- */
   closing: {
     message: "We can't wait to\ncelebrate with you!",
     // Leave blank to fall back to "Groom & Bride"
     signature: "Ayush & Yashika"
   },
 
-  /* ---------- 14. BACKGROUND MUSIC ----------
+  /* ---------- 15. BACKGROUND MUSIC ----------
      Put an .mp3 in  assets/audio/  and set the path below.
      Set  enabled: false  to remove the speaker button entirely.
      Music starts when the guest taps the wax seal (browsers block
@@ -188,7 +197,7 @@ const WEDDING = {
     startMuted: false
   },
 
-  /* ---------- 15. FIXED UI LABELS ---------- */
+  /* ---------- 16. FIXED UI LABELS ---------- */
   ui: {
     tapToOpen:     "Tap",
     youAreInvited: "You Are Invited",

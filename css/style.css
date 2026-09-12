@@ -8,17 +8,18 @@
   --blush-2:#EFD3CE;
   --blush-3:#E2B9B3;
   --rose:#D9A5A0;
-  --maroon:#8B1E2D;
-  --maroon-deep:#6B1421;
+  --maroon:#9B273A;
+  --maroon-deep:#7C1C2C;
   --gold:#C3A05A;
   --gold-lt:#E2CB96;
-  --cream:#FDF9F6;
-  --paper:#FBF4F0;
-  --ink:#4A3437;
-  --muted:#907477;
+  --cream:#FDF6F5;
+  --paper:#FBEFEE;
+  --rose-line:#E4A9AE;
+  --ink:#3B161E;
+  --muted:#764C54;
 
   --script:'Great Vibes', cursive;
-  --serif:'Cormorant Garamond', Georgia, serif;
+  --serif:'Lora', Georgia, serif;
 
   --shadow-soft:0 10px 30px rgba(107,20,33,.10);
   --shadow-card:0 18px 50px rgba(74,52,55,.18);
@@ -307,11 +308,24 @@ body.opened .invite{ opacity:1 }
   margin-bottom:8px;
 }
 
+/* The reference marks every heading with a rule broken by a small heart.
+   One pseudo-element does all three parts: the heart is the content, the
+   two rules are background gradients pinned to either side. */
 .sec-title::after{
+  /* Rule broken by a small heart. The heart is an inline SVG rather than the
+     U+2665 character: no font on the device is guaranteed to carry that glyph,
+     and the fallback renders as a stray symbol. */
   content:'';
-  display:block; width:52px; height:1px;
-  background:linear-gradient(90deg,transparent,var(--gold),transparent);
-  margin:14px auto 0;
+  display:block;
+  width:164px; height:11px;
+  margin:13px auto 0;
+  background-image:
+    linear-gradient(90deg, transparent 0%, var(--rose-line) 78%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 22'%3E%3Cpath fill='%23E4A9AE' d='M12 21C5 16 1 11.6 1 7.2A6 6 0 0 1 12 4 6 6 0 0 1 23 7.2C23 11.6 19 16 12 21z'/%3E%3C/svg%3E"),
+    linear-gradient(90deg, var(--rose-line) 22%, transparent 100%);
+  background-size:58px 1px, 10px 10px, 58px 1px;
+  background-position:left center, center center, right center;
+  background-repeat:no-repeat;
 }
 
 .sec-icon{
@@ -667,17 +681,11 @@ body.opened .invite{ opacity:1 }
    ============================================================ */
 
 .sec-events{ background:var(--cream) }
-.events-list{ margin-top:28px; display:grid; gap:16px }
-.ev{
-  background:#fff;
-  border:1px solid rgba(139,30,45,.09);
-  border-radius:10px;
-  padding:18px 16px;
-  box-shadow:var(--shadow-soft);
-}
+.events-list{ margin-top:26px; display:grid; gap:22px }
+.ev{ padding:0 }
 .ev-title{
-  font-family:var(--script); font-size:27px; font-weight:400;
-  color:var(--maroon); line-height:1.2;
+  font-size:16px; font-weight:600; letter-spacing:.01em;
+  color:var(--maroon); line-height:1.3;
 }
 .ev-when { font-size:13px; letter-spacing:.05em; color:var(--muted); margin-top:4px }
 .ev-where{ font-size:13px; font-style:italic; color:var(--muted) }
@@ -698,12 +706,12 @@ body.opened .invite{ opacity:1 }
   padding-block:56px 90px;
 }
 .wave{
-  display:block; height:16px; margin:0 auto 26px; width:180px;
-  background:
-    radial-gradient(circle at 50% 120%, transparent 8px, var(--blush-3) 8px, var(--blush-3) 9px, transparent 9px) 0 0/24px 16px repeat-x;
-  opacity:.7;
+  display:block; height:22px; width:min(78vw,300px); margin:0 auto 28px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='22' viewBox='0 0 300 22'%3E%3Cg fill='none' stroke='%23E4A9AE' stroke-width='1.1' stroke-linecap='round'%3E%3Cpath d='M6 13c26-12 52 6 78-2s52-10 78 2 52 10 78 2 40-6 54-4'/%3E%3C/g%3E%3Cg fill='%23E4A9AE'%3E%3Ccircle cx='84' cy='11' r='1.5'/%3E%3Ccircle cx='150' cy='9' r='1.5'/%3E%3Ccircle cx='216' cy='11' r='1.5'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:center; background-size:contain;
+  opacity:.85;
 }
-.wave-b{ margin:34px auto 0; transform:rotate(180deg) }
+.wave-b{ margin:34px auto 0; transform:scaleY(-1) }
 
 .closing-msg{
   font-family:var(--script);
@@ -821,4 +829,39 @@ body.scrolled .scroll-cue{ opacity:0; transition-delay:0s }
   .hero-bg{ animation:none }
   .hero-bg::after{ animation:none }
   .count-box b.tick{ transform:none; opacity:1 }
+}
+
+
+/* ============================================================
+   18. SAVE THE DATE + VENUE ILLUSTRATION
+   ============================================================ */
+
+.btn-save{
+  display:inline-flex; align-items:center; gap:9px;
+  margin-top:24px;
+  border:0; cursor:pointer;
+  font-size:12px; letter-spacing:.16em;
+  position:relative;
+}
+.btn-save svg{
+  width:15px; height:15px;
+  fill:none; stroke:currentColor;
+  stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round;
+}
+/* the file lands silently on a phone, so say something */
+.btn-save.saved span{ visibility:hidden }
+.btn-save.saved::after{
+  content:'Added to your calendar';
+  position:absolute; inset:0;
+  display:grid; place-items:center;
+  letter-spacing:.06em;
+}
+
+.venue-art{
+  display:block;
+  width:min(66vw,230px); height:auto;
+  margin:22px auto 4px;
+  fill:none; stroke:var(--rose-line);
+  stroke-width:1.1; stroke-linecap:round; stroke-linejoin:round;
+  opacity:.9;
 }
