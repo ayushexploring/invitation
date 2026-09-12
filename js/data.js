@@ -15,7 +15,18 @@ const WEDDING = {
     description: "We are honored to invite you to our wedding celebration."
   },
 
-  /* ---------- 2. THE COUPLE ---------- */
+  /* ---------- 2. THE OPENING SCREEN BACKGROUND ----------
+     Leave image as "" and the hero uses the built-in garden-at-dusk
+     gradient. To use your own photo instead, put it in assets/images/
+     and set the path here, e.g. "assets/images/hero.jpg".
+     Choose a DARK photo - the names are printed in white over it.
+     Raise overlay (0 to 1) to darken a photo that is too bright. */
+  hero: {
+    image:   "",
+    overlay: 0.35
+  },
+
+  /* ---------- 3. THE COUPLE ---------- */
   couple: {
     groom: {
       name:    "Ayush Verma",

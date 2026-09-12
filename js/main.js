@@ -55,6 +55,7 @@
       }
     }
 
+    renderHeroImage();
     renderTimeline();
     renderEvents();
     renderGallery();
@@ -69,6 +70,22 @@
       sign = t(WEDDING.couple.groom.name) + '  &  ' + t(WEDDING.couple.bride.name);
     }
     $('#closingSign').textContent = sign;
+  }
+
+  /* Swap the built-in gradient for the couple's own photo, if they set one.
+     The dark overlay rides on top so white text stays readable whatever
+     the photo looks like. */
+  function renderHeroImage() {
+    var cfg = WEDDING.hero || {};
+    if (!cfg.image) return;
+    var bg = $('.hero-bg');
+    if (!bg) return;
+    var shade = Math.min(Math.max(Number(cfg.overlay) || 0, 0), 1);
+    bg.style.backgroundImage =
+      'linear-gradient(rgba(18,14,22,' + shade + '), rgba(12,10,18,' + (shade + 0.18) + ')),' +
+      'url("' + cfg.image + '")';
+    bg.style.backgroundSize = 'cover, cover';
+    bg.style.backgroundPosition = 'center, center';
   }
 
   function renderTimeline() {
@@ -221,20 +238,67 @@
   function initPetals() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     var box = $('#petals');
-    var n = window.innerWidth < 520 ? 12 : 18;
+    var n = window.innerWidth < 520 ? 14 : 20;
     for (var i = 0; i < n; i++) {
       var p = document.createElement('span');
       p.className = 'petal';
-      p.style.left            = (Math.random() * 100) + 'vw';
-      p.style.animationDuration = (9 + Math.random() * 10) + 's';
-      p.style.animationDelay    = (-Math.random() * 18) + 's';
-      p.style.setProperty('--drift', (Math.random() * 120 - 60) + 'px');
+      /* Two nested animations: the wrapper falls, the petal inside sways
+         and tumbles. Each on its own clock, so no two petals match. */
+      var inner = document.createElement('i');
+      p.appendChild(inner);
+
+      p.style.left              = (Math.random() * 100) + 'vw';
+      p.style.animationDuration = (11 + Math.random() * 11) + 's';
+      p.style.animationDelay    = (-Math.random() * 20) + 's';
+
+      inner.style.animationDuration = (2.6 + Math.random() * 3.4) + 's';
+      inner.style.animationDelay    = (-Math.random() * 6) + 's';
+      inner.style.setProperty('--sway', (14 + Math.random() * 26) + 'px');
+      inner.style.setProperty('--spin', (Math.random() < 0.5 ? -1 : 1) * (180 + Math.random() * 360) + 'deg');
+
       var s = 7 + Math.random() * 8;
-      p.style.width = s + 'px';
-      p.style.height = s + 'px';
-      p.style.opacity = 0.3 + Math.random() * 0.4;
+      inner.style.width  = s + 'px';
+      inner.style.height = s + 'px';
+      inner.style.opacity = 0.26 + Math.random() * 0.38;
       box.appendChild(p);
     }
+  }
+
+
+  /* ============================================================
+     HERO PARALLAX + SCROLL STATE
+     ============================================================ */
+
+  function initScrollEffects() {
+    var heroBg = $('.hero-bg');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var ticking = false;
+
+    /* The background already animates `transform` (the slow drift) and the
+       arch uses `transform` for its entrance, so parallax is written to the
+       separate `translate` property instead. The two compose rather than
+       overwrite each other. Browsers without it simply get no parallax. */
+    function frame() {
+      ticking = false;
+      var y = window.scrollY || 0;
+
+      /* mark the first movement so the scroll cue can fade away */
+      document.body.classList.toggle('scrolled', y > 24);
+
+      if (reduce || !heroBg) return;
+
+      /* only while the hero is still on screen - past that it is wasted work */
+      var vh = window.innerHeight;
+      if (y < vh * 1.3) {
+        heroBg.style.translate = '0 ' + ((y / vh) * 18).toFixed(2) + '%';
+      }
+    }
+
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(frame); }
+    }, { passive: true });
+
+    frame();
   }
 
 
@@ -289,6 +353,15 @@
 
     function pad(n) { return (n < 10 ? '0' : '') + n; }
 
+    /* Only touch the DOM when a digit actually changes, and give it a small
+       lift as it does - a whole grid re-rendering every second reads as noise. */
+    function set(el, value) {
+      if (el.textContent === value) return;
+      el.textContent = value;
+      el.classList.add('tick');
+      setTimeout(function () { el.classList.remove('tick'); }, 220);
+    }
+
     function tick() {
       var diff = target - Date.now();
       if (diff <= 0) {
@@ -298,10 +371,10 @@
         return;
       }
       var sec = Math.floor(diff / 1000);
-      els.d.textContent = Math.floor(sec / 86400);
-      els.h.textContent = pad(Math.floor(sec / 3600) % 24);
-      els.m.textContent = pad(Math.floor(sec / 60) % 60);
-      els.s.textContent = pad(sec % 60);
+      set(els.d, String(Math.floor(sec / 86400)));
+      set(els.h, pad(Math.floor(sec / 3600) % 24));
+      set(els.m, pad(Math.floor(sec / 60) % 60));
+      set(els.s, pad(sec % 60));
     }
 
     tick();
@@ -442,6 +515,7 @@
   initMusic();
   initPetals();
   initReveal();
+  initScrollEffects();
   initCountdown();
   initScratch();
 
