@@ -1,0 +1,11 @@
+# OS / editor junk
+Thumbs.db
+ehthumbs.db
+.DS_Store
+desktop.ini
+*.swp
+.vscode/
+.idea/
+
+# local preview artifacts
+_preview-qr.png
