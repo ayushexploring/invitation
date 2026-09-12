@@ -12,8 +12,8 @@ const WEDDING = {
   site: {
     // Shown in the browser tab and when the link is shared on WhatsApp
     title: {
-      en: "Ayush & Ananya - Wedding Invitation",
-      hi: "आयुष एवं अनन्या - विवाह निमंत्रण"
+      en: "Ayush & Yashika - Wedding Invitation",
+      hi: "आयुष एवं यशिका - विवाह निमंत्रण"
     },
     description: {
       en: "We are honored to invite you to our wedding celebration.",
@@ -24,16 +24,12 @@ const WEDDING = {
   /* ---------- 2. THE COUPLE ---------- */
   couple: {
     groom: {
-      name:          { en: "Ayush",                    hi: "आयुष" },
-      parents:       { en: "Son of Mr. & Mrs. Sharma", hi: "श्री एवं श्रीमती शर्मा के सुपुत्र" },
-      qualification: { en: "B.Tech, M.Tech",           hi: "बी.टेक, एम.टेक" },
-      profession:    { en: "Software Engineer",        hi: "सॉफ़्टवेयर इंजीनियर" }
+      name:    { en: "Ayush Verma",             hi: "आयुष वर्मा" },
+      parents: { en: "Son of Mr. & Mrs. Verma", hi: "श्री एवं श्रीमती वर्मा के सुपुत्र" }
     },
     bride: {
-      name:          { en: "Ananya",                      hi: "अनन्या" },
-      parents:       { en: "Daughter of Mr. & Mrs. Verma", hi: "श्री एवं श्रीमती वर्मा की सुपुत्री" },
-      qualification: { en: "B.Tech, MBA",                 hi: "बी.टेक, एम.बी.ए" },
-      profession:    { en: "Advocate, High Court",        hi: "अधिवक्ता, उच्च न्यायालय" }
+      name:    { en: "Yashika Sharma",                hi: "यशिका शर्मा" },
+      parents: { en: "Daughter of Mr. & Mrs. Sharma", hi: "श्री एवं श्रीमती शर्मा की सुपुत्री" }
     }
   },
 
@@ -41,11 +37,11 @@ const WEDDING = {
      IMPORTANT: this ONE value drives the countdown timer and
      everything else that needs the actual date/time.
      Format: YYYY-MM-DDTHH:MM:SS+05:30   (+05:30 = India Standard Time) */
-  weddingDateTime: "2026-12-10T10:30:00+05:30",
+  weddingDateTime: "2026-12-11T10:30:00+05:30",
 
   // How the date is spelled out on the page
-  weddingDateText: { en: "December 10, 2026",  hi: "10 दिसम्बर, 2026" },
-  weddingDayText:  { en: "Thursday",           hi: "गुरुवार" },
+  weddingDateText: { en: "December 11, 2026",  hi: "11 दिसम्बर, 2026" },
+  weddingDayText:  { en: "Friday",             hi: "शुक्रवार" },
   weddingTimeText: { en: "10:30 AM onwards",   hi: "प्रातः 10:30 बजे से" },
 
   /* ---------- 4. SECTION: SCRATCH TO REVEAL ---------- */
@@ -84,12 +80,12 @@ const WEDDING = {
     items: [
       {
         title: { en: "Guest Arrival",           hi: "अतिथि आगमन" },
-        when:  { en: "Dec 10, 2026 - 10:00 AM", hi: "10 दिसम्बर, 2026 - प्रातः 10:00" },
+        when:  { en: "Dec 11, 2026 - 10:00 AM", hi: "11 दिसम्बर, 2026 - प्रातः 10:00" },
         note:  { en: "We warmly welcome you.",  hi: "आपका हार्दिक स्वागत है।" }
       },
       {
         title: { en: "Wedding Ceremony",        hi: "विवाह संस्कार" },
-        when:  { en: "Dec 10, 2026 - 10:30 AM", hi: "10 दिसम्बर, 2026 - प्रातः 10:30" },
+        when:  { en: "Dec 11, 2026 - 10:30 AM", hi: "11 दिसम्बर, 2026 - प्रातः 10:30" },
         note:  { en: "Your gracious presence is requested.", hi: "आपकी उपस्थिति प्रार्थनीय है।" }
       },
       {
@@ -103,13 +99,13 @@ const WEDDING = {
   /* ---------- 9. SECTION: VENUE ---------- */
   venue: {
     heading: { en: "Venue",            hi: "स्थान" },
-    name:    { en: "The Grand Palace", hi: "द ग्रैंड पैलेस" },
+    name:    { en: "Aloha on the Ganges", hi: "आलोहा ऑन द गंगेस" },
     address: {
-      en: "Apollo Bandar, Colaba,\nMumbai, Maharashtra 400001",
-      hi: "अपोलो बंदर, कोलाबा,\nमुंबई, महाराष्ट्र 400001"
+      en: "Rishikesh,\nUttarakhand",
+      hi: "ऋषिकेश,\nउत्तराखंड"
     },
     // Paste ANY Google Maps share link here
-    mapsUrl:   "https://maps.google.com/?q=The+Taj+Mahal+Palace+Mumbai",
+    mapsUrl:   "https://maps.google.com/?q=Aloha+on+the+Ganges+Rishikesh",
     mapsLabel: { en: "View on Google Maps", hi: "गूगल मैप्स पर देखें" }
   },
 
@@ -138,18 +134,18 @@ const WEDDING = {
     items: [
       {
         title: { en: "Mehendi",               hi: "मेहंदी" },
-        when:  { en: "Dec 7, 2026 - 9:30 PM", hi: "7 दिसम्बर, 2026 - रात्रि 9:30" },
+        when:  { en: "Dec 8, 2026 - 9:30 PM", hi: "8 दिसम्बर, 2026 - रात्रि 9:30" },
         where: { en: "At Bride's Residence",  hi: "वधू निवास पर" }
       },
       {
         title: { en: "Haldi",                 hi: "हल्दी" },
-        when:  { en: "Dec 8, 2026 - 8:30 AM", hi: "8 दिसम्बर, 2026 - प्रातः 8:30" },
+        when:  { en: "Dec 9, 2026 - 8:30 AM", hi: "9 दिसम्बर, 2026 - प्रातः 8:30" },
         where: { en: "At Groom's Residence",  hi: "वर निवास पर" }
       },
       {
         title: { en: "Sangeet",               hi: "संगीत" },
-        when:  { en: "Dec 9, 2026 - 8:00 PM", hi: "9 दिसम्बर, 2026 - रात्रि 8:00" },
-        where: { en: "The Grand Palace",      hi: "द ग्रैंड पैलेस" }
+        when:  { en: "Dec 10, 2026 - 8:00 PM", hi: "10 दिसम्बर, 2026 - रात्रि 8:00" },
+        where: { en: "Aloha on the Ganges",   hi: "आलोहा ऑन द गंगेस" }
       }
     ]
   },
@@ -161,16 +157,16 @@ const WEDDING = {
       show: true,
       heading: { en: "Transportation", hi: "आवागमन" },
       text: {
-        en: "Shuttle service will be available from the city centre to the venue. Pickup from Central Station at 7:00 PM.",
-        hi: "शहर के केंद्र से कार्यक्रम स्थल तक शटल सेवा उपलब्ध रहेगी। सेंट्रल स्टेशन से सायं 7:00 बजे प्रस्थान।"
+        en: "Rishikesh is about a 45 minute drive from Jolly Grant Airport, Dehradun. Do tell us if you need help arranging a pickup.",
+        hi: "ऋषिकेश, जॉली ग्रांट हवाई अड्डा, देहरादून से लगभग 45 मिनट की दूरी पर है। आने-जाने में सहायता हेतु हमें अवश्य बताएँ।"
       }
     },
     accommodation: {
       show: true,
       heading: { en: "Accommodation", hi: "ठहरने की व्यवस्था" },
       text: {
-        en: "Special rates at The Grand Palace (5 minutes from the venue). Use code WEDDING2026 when booking.",
-        hi: "द ग्रैंड पैलेस में विशेष दरें (कार्यक्रम स्थल से 5 मिनट)। बुकिंग के समय कोड WEDDING2026 का प्रयोग करें।"
+        en: "Rooms are arranged at Aloha on the Ganges for guests travelling in. Please let us know your dates.",
+        hi: "बाहर से आने वाले अतिथियों हेतु आलोहा ऑन द गंगेस में ठहरने की व्यवस्था है। कृपया अपनी तिथियाँ बताएँ।"
       }
     },
     gifts: {
@@ -190,7 +186,7 @@ const WEDDING = {
       hi: "हम आपके साथ यह उत्सव\nमनाने के लिए उत्सुक हैं!"
     },
     // Leave blank to fall back to "Groom & Bride"
-    signature: { en: "", hi: "" }
+    signature: { en: "Ayush & Yashika", hi: "आयुष एवं यशिका" }
   },
 
   /* ---------- 14. BACKGROUND MUSIC ----------
