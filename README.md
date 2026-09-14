@@ -12,9 +12,8 @@ No backend, no build step, no dependencies. Just HTML, CSS and one JS file.
 | Section | Notes |
 |---|---|
 | Envelope opening screen | Tap the gold wax seal to open. Starts the music. |
-| Hero | Both names, parents, qualifications, profession |
-| Scratch to Reveal | Scratch the heart with a finger to uncover the date |
-| Our forever begins | Animated heart outline + the date |
+| Hero | Both names and parents, over a background photo or the built-in gradient |
+| Scratch to Reveal | Scratch the heart with a finger to uncover the date, plus a "Save the Date" button |
 | Photo gallery | Optional — hidden until you add photos |
 | Countdown | Live ticking countdown to the ceremony |
 | Program Timeline | Arrival / ceremony / reception |

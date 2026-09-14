@@ -52,7 +52,7 @@ const WEDDING = {
   calendar: {
     title:    "Wedding of Ayush & Yashika",
     hours:    4,
-    location: "Aloha on the Ganges, Rishikesh, Uttarakhand"
+    location: "Pleasant Tree Hotels, Jamniwala, Guniyal Gaon, Dehradun, Uttarakhand"
   },
 
   /* ---------- 5. SECTION: SCRATCH TO REVEAL ---------- */
@@ -63,13 +63,7 @@ const WEDDING = {
     saveLabel: "SAVE THE DATE"
   },
 
-  /* ---------- 6. SECTION: OUR FOREVER BEGINS ---------- */
-  forever: {
-    heading:  "Our forever begins",
-    subtitle: "You Are Invited"
-  },
-
-  /* ---------- 7. SECTION: PHOTO GALLERY ----------
+  /* ---------- 6. SECTION: PHOTO GALLERY ----------
      Drop your photos into  assets/images/  and list the filenames here.
      Leave the list empty  ( photos: [] )  to hide the gallery entirely. */
   gallery: {
@@ -80,13 +74,13 @@ const WEDDING = {
     ]
   },
 
-  /* ---------- 8. SECTION: COUNTDOWN ---------- */
+  /* ---------- 7. SECTION: COUNTDOWN ---------- */
   countdown: {
     heading:  "Counting Down to Forever",
     finished: "Today is the day!"
   },
 
-  /* ---------- 9. SECTION: PROGRAM TIMELINE ---------- */
+  /* ---------- 8. SECTION: PROGRAM TIMELINE ---------- */
   timeline: {
     heading: "Program Timeline",
     items: [
@@ -108,17 +102,17 @@ const WEDDING = {
     ]
   },
 
-  /* ---------- 10. SECTION: VENUE ---------- */
+  /* ---------- 9. SECTION: VENUE ---------- */
   venue: {
     heading: "Venue",
-    name:    "Aloha on the Ganges",
-    address: "Rishikesh,\nUttarakhand",
+    name:    "Pleasant Tree Hotels",
+    address: "Near Abhimanyu Cricket Academy, Jamniwala,\nGuniyal Gaon, Dehradun, Uttarakhand 248001",
     // Paste ANY Google Maps share link here
-    mapsUrl:   "https://maps.google.com/?q=Aloha+on+the+Ganges+Rishikesh",
+    mapsUrl:   "https://maps.google.com/?q=Pleasant+Tree+Hotels+Jamniwala+Guniyal+Gaon+Dehradun+Uttarakhand",
     mapsLabel: "View on Google Maps"
   },
 
-  /* ---------- 11. SECTION: DRESS CODE ----------
+  /* ---------- 10. SECTION: DRESS CODE ----------
      Set  show: false  to hide this whole section. */
   dressCode: {
     show: true,
@@ -133,7 +127,7 @@ const WEDDING = {
     }
   },
 
-  /* ---------- 12. SECTION: PRE-WEDDING EVENTS ----------
+  /* ---------- 11. SECTION: PRE-WEDDING EVENTS ----------
      Delete entries from  items  or set  show: false  to hide. */
   events: {
     show: true,
@@ -152,23 +146,23 @@ const WEDDING = {
       {
         title: "Sangeet",
         when:  "Dec 10, 2026 - 8:00 PM",
-        where: "Aloha on the Ganges"
+        where: "Pleasant Tree Hotels"
       }
     ]
   },
 
-  /* ---------- 13. SECTION: INFO CARDS ----------
+  /* ---------- 12. SECTION: INFO CARDS ----------
      Any card with  show: false  disappears from the page. */
   info: {
     transportation: {
       show: true,
       heading: "Transportation",
-      text: "Rishikesh is about a 45 minute drive from Jolly Grant Airport, Dehradun. Do tell us if you need help arranging a pickup."
+      text: "Pleasant Tree Hotels is close to Dehradun's Jolly Grant Airport, on the road toward Mussoorie. Do tell us if you need help arranging a pickup."
     },
     accommodation: {
       show: true,
       heading: "Accommodation",
-      text: "Rooms are arranged at Aloha on the Ganges for guests travelling in. Please let us know your dates."
+      text: "Rooms are arranged at Pleasant Tree Hotels for guests travelling in. Please let us know your dates."
     },
     gifts: {
       show: true,
@@ -177,14 +171,14 @@ const WEDDING = {
     }
   },
 
-  /* ---------- 14. CLOSING ---------- */
+  /* ---------- 13. CLOSING ---------- */
   closing: {
     message: "We can't wait to\ncelebrate with you!",
     // Leave blank to fall back to "Groom & Bride"
     signature: "Ayush & Yashika"
   },
 
-  /* ---------- 15. BACKGROUND MUSIC ----------
+  /* ---------- 14. BACKGROUND MUSIC ----------
      Put an .mp3 in  assets/audio/  and set the path below.
      Set  enabled: false  to remove the speaker button entirely.
      Music starts when the guest taps the wax seal (browsers block
@@ -196,7 +190,7 @@ const WEDDING = {
     startMuted: false
   },
 
-  /* ---------- 16. FIXED UI LABELS ---------- */
+  /* ---------- 15. FIXED UI LABELS ---------- */
   ui: {
     tapToOpen:     "Tap",
     youAreInvited: "You Are Invited",
