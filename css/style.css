@@ -52,24 +52,32 @@ h1,h2,h3,p{margin:0}
 .envelope-screen{
   position:fixed; inset:0; z-index:100;
   display:grid; place-items:center;
-  padding:24px;
-  background:
-    radial-gradient(120% 90% at 50% 15%, #FBEDEA 0%, #EFD3CE 45%, #DCB0AA 100%);
+  background:var(--blush-2);
   transition:opacity .7s ease, visibility .7s;
+  overflow:hidden;
 }
 .envelope-screen.gone{ opacity:0; visibility:hidden; pointer-events:none }
 
-.env-stage{ display:grid; justify-items:center; gap:26px; perspective:1400px }
+/* The envelope fills the whole screen - it IS the surface the guest is
+   looking at, not a card floating on a table. Capped on wide viewports
+   so it doesn't stretch into an absurdly wide, flat shape on a desktop
+   browser window. */
+.env-stage{
+  position:relative;
+  width:100%; height:100%;
+  max-width:560px;
+  /* larger than the old 1400px: at full-screen size a tight perspective
+     distance makes the flap's 3D flip look fisheyed rather than gentle */
+  perspective:2400px;
+}
 
 .envelope{
-  position:relative;
-  width:min(78vw, 300px);
-  aspect-ratio:3/4.1;
+  position:absolute; inset:0;
   transform-style:preserve-3d;
   transition:transform 1s cubic-bezier(.6,.05,.3,1), opacity .8s ease;
   cursor:pointer;
 }
-.envelope.launch{ transform:scale(1.55) translateY(-6%); opacity:0 }
+.envelope.launch{ transform:scale(1.3) translateY(-4%); opacity:0 }
 
 /* --- embossed floral paper, shared by all envelope faces --- */
 .env-back,.env-pocket,.env-flap{
@@ -77,14 +85,12 @@ h1,h2,h3,p{margin:0}
   background-color:var(--blush-2);
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.40' stroke-width='1.1' stroke-linecap='round'%3E%3Cpath d='M10 48c6-10 6-20 2-28'/%3E%3Cpath d='M12 40c4-2 7-1 9 2'/%3E%3Cpath d='M11 32c-4-1-6-4-6-8'/%3E%3Cpath d='M10 24c4-2 6-5 6-9'/%3E%3Cpath d='M40 18c6 10 6 20 2 28'/%3E%3Cpath d='M42 26c4-2 7-1 9 2'/%3E%3Cpath d='M41 34c-4-1-6-4-6-8'/%3E%3Cpath d='M40 42c4-2 6-5 6-9'/%3E%3C/g%3E%3Cg fill='%23ffffff' fill-opacity='.35'%3E%3Ccircle cx='30' cy='8' r='1.4'/%3E%3Ccircle cx='30' cy='52' r='1.4'/%3E%3Ccircle cx='55' cy='30' r='1.2'/%3E%3Ccircle cx='5' cy='30' r='1.2'/%3E%3C/g%3E%3C/svg%3E");
   background-size:38px 38px;
-  border-radius:8px;
 }
 
 /* .env-back doubles as the envelope's inner lining - it is completely
    hidden while the flap is closed, and becomes the gold interior once
    the flap turns over. */
 .env-back{
-  box-shadow:var(--shadow-card);
   background-color:#8C6B38;
   background-image:linear-gradient(165deg,#C9A967 0%,#A8843F 45%,#7E5F2B 100%);
   /* The shared rule above tiles at 38px for the floral texture. Without
@@ -97,8 +103,8 @@ h1,h2,h3,p{margin:0}
   position:absolute; left:7%; right:7%; top:6%; bottom:12%;
   z-index:2;
   background:linear-gradient(165deg,#FFFDFC 0%,#FCF2EE 100%);
-  border-radius:5px;
-  box-shadow:0 6px 18px rgba(74,52,55,.22);
+  border-radius:6px;
+  box-shadow:0 10px 30px rgba(74,52,55,.28);
   display:grid; place-items:center;
   transition:transform 1s cubic-bezier(.34,1.2,.4,1);
 }
@@ -117,35 +123,58 @@ h1,h2,h3,p{margin:0}
 .env-card-rule{ display:block; width:42px; height:1px; background:var(--gold); margin:8px auto }
 .env-card-date{ font-size:11px; letter-spacing:.12em; color:var(--muted) }
 
-/* Front pocket: a V-shaped top edge, everything below it.
-   Its shape is the exact complement of the flap below, so together the
-   two tile the whole envelope with no gap for the card to show through. */
+/* Front pocket: a V-shaped top edge, everything below it. Its shape is
+   the exact complement of the flap below, so together the two tile the
+   whole envelope with no gap for the card to show through.
+   The 34.8% / 56.1% figures are not arbitrary - they are measured off
+   a screenshot of the reference site at this exact viewport size (the
+   flap's shoulder height and its point, as fractions of full screen
+   height). The old 38% / 72% pair was tuned for a small ~3:4 floating
+   card; stretched across a full ~9:19 phone screen it drew a flap that
+   looked like a steep spike rather than a gentle envelope fold - close
+   to what was probably reading as "already open" at a glance. */
 .env-pocket{
   z-index:3;
-  clip-path:polygon(0 38%, 50% 72%, 100% 38%, 100% 100%, 0 100%);
+  clip-path:polygon(0 34.8%, 50% 56.1%, 100% 34.8%, 100% 100%, 0 100%);
 }
 
 /* The flap: a pentagon - flat across the top, straight down the sides,
    then angled to a point in the middle. Hinged along its top edge. */
 .env-flap{
   z-index:4;
-  clip-path:polygon(0 0, 100% 0, 100% 38%, 50% 72%, 0 38%);
+  clip-path:polygon(0 0, 100% 0, 100% 34.8%, 50% 56.1%, 0 34.8%);
   transform-origin:top center;
   transform:rotateX(0deg);
   transition:transform .95s cubic-bezier(.6,.02,.3,1), z-index 0s .45s;
   backface-visibility:hidden;
-  /* the drop-shadow follows the clip-path silhouette, which is what draws
-     the crease along the V - without it the envelope reads as a flat card */
-  filter:drop-shadow(0 2px 2px rgba(107,20,33,.24));
 }
-/* faint shading so the flap sits slightly forward of the pocket */
+/* Light gathers near the hinge at the top, shadow gathers where the
+   fold presses down against the pocket at the bottom - a paper surface
+   catches light unevenly as it curves, a flat overlay does not. */
 .env-flap::before{
   content:''; position:absolute; inset:0;
   background:linear-gradient(180deg,
-    rgba(255,255,255,.26) 0%,
-    rgba(255,255,255,0) 42%,
-    rgba(139,30,45,.08) 100%);
+    rgba(255,255,255,.32) 0%,
+    rgba(255,255,255,.05) 55%,
+    rgba(120,30,40,.06) 80%,
+    rgba(90,20,30,.20) 100%);
 }
+/* The fold seam itself - see the HTML comment above the <svg> for why
+   this exists instead of a shadow. Two overlaid strokes: a soft wide
+   one standing in for the shadow filter that does not render, and a
+   crisp fine one for the pinstripe the reference actually shows. */
+.env-fold-line{
+  position:absolute; inset:0; z-index:5;
+  width:100%; height:100%;
+  pointer-events:none;
+  fill:none;
+  transition:opacity .3s ease;
+}
+/* wide + soft: standing in for the shadow a real fold would cast */
+.env-fold-line .fold-shade{ stroke:rgba(80,20,28,.18); stroke-width:11px }
+/* fine + crisp: the decorative pinstripe the reference traces along
+   the same seam */
+.env-fold-line .fold-pinstripe{ stroke:rgba(190,145,85,.85); stroke-width:2px }
 /* gold inner lining, seen once the flap turns over */
 .env-flap::after{
   content:''; position:absolute; inset:0;
@@ -155,13 +184,21 @@ h1,h2,h3,p{margin:0}
 }
 .envelope.open .env-flap{ transform:rotateX(-172deg); z-index:1 }
 .envelope.open .env-flap::after{ opacity:1 }
+/* a flat line at rest on the pocket - it doesn't lift with the flap, so
+   it fades out rather than staying stranded once the flap rotates away */
+.envelope.open .env-fold-line{ opacity:0 }
 
-/* wax seal */
+/* wax seal - sits exactly at the flap's point (56.1%), sized relative
+   to the viewport so it holds a similar proportion on small and large
+   phones alike rather than a fixed px size shrinking on tiny screens
+   or looking undersized on big ones. */
 .seal{
   position:absolute; z-index:6;
-  top:72%; left:50%;
+  top:56.1%; left:50%;
   transform:translate(-50%,-50%);
-  width:74px; height:74px; padding:0;
+  /* measured off the reference at ~27% of viewport width */
+  width:clamp(88px, 27vw, 128px); height:clamp(88px, 27vw, 128px);
+  padding:0;
   border:0; border-radius:50%;
   cursor:pointer;
   background:
@@ -178,7 +215,7 @@ h1,h2,h3,p{margin:0}
   border:1px solid rgba(255,255,255,.45); border-radius:50%;
 }
 .seal-text{
-  font-family:var(--script); font-size:17px; color:#5C4315;
+  font-family:var(--script); font-size:clamp(17px, 6.1vw, 25px); color:#5C4315;
   text-shadow:0 1px 0 rgba(255,255,255,.35);
   pointer-events:none;
 }
@@ -190,8 +227,13 @@ h1,h2,h3,p{margin:0}
   50%    { box-shadow:0 6px 14px rgba(90,60,20,.4), inset 0 -2px 6px rgba(0,0,0,.28), inset 0 2px 4px rgba(255,255,255,.5), 0 0 0 16px rgba(195,160,90,0) }
 }
 
+/* Sits on the pocket below the seal now, printed on the paper itself,
+   rather than as a caption living below a small floating card. */
 .env-caption{
-  display:flex; align-items:center; gap:12px;
+  position:absolute; left:0; right:0;
+  top:calc(56.1% + 64px);
+  z-index:5;
+  display:flex; align-items:center; justify-content:center; gap:12px;
   font-size:10px; letter-spacing:.42em; text-transform:uppercase;
   color:var(--maroon); opacity:.75;
   transition:opacity .4s;
@@ -494,7 +536,11 @@ body.opened .invite{ opacity:1 }
      y-value here is shifted +13 so the full shape sits inside the box. */
   -webkit-clip-path:path('M120 215 C 38 161, 6 111, 6 75 A 56 56 0 0 1 120 53 A 56 56 0 0 1 234 75 C 234 111, 202 161, 120 215 Z');
   clip-path:path('M120 215 C 38 161, 6 111, 6 75 A 56 56 0 0 1 120 53 A 56 56 0 0 1 234 75 C 234 111, 202 161, 120 215 Z');
-  filter:drop-shadow(0 10px 22px rgba(139,30,45,.20));
+  /* No drop-shadow here: filter:drop-shadow renders nothing at all once
+     clip-path is on the same element (confirmed directly while fixing
+     the envelope flap, which had the identical dead combination) - a
+     shadow here was never actually visible, so removing it changes
+     nothing on screen, just the CSS. */
   /* stop the drag from selecting the date text underneath */
   -webkit-user-select:none; user-select:none;
   -webkit-tap-highlight-color:transparent;
