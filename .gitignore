@@ -11,10 +11,19 @@ desktop.ini
 _preview-qr.png
 
 # Raw source photos dropped at the project root before processing.
-# One of these has been checked and carries GPS EXIF data revealing where
-# it was taken - never commit originals here, only the resized, metadata-
-# stripped copies that Python writes into assets/images/.
+# Several of these carry GPS EXIF data revealing where they were taken -
+# never commit originals here, only the resized, metadata-stripped copies
+# that Python writes into assets/images/. The IMG_* patterns catch
+# straight-off-the-phone filenames; add any other name you drop in here.
 hero-background.*
 firsr-photo-heart.*
 rest-of-the-grid.*
 whatsapp-preview.*
+IMG_*.jpg
+IMG_*.jpeg
+IMG_*.png
+IMG_*.heic
+IMG_*.HEIC
+IMG_*.JPG
+IMG_*.JPEG
+IMG_*.PNG

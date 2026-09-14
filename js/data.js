@@ -65,12 +65,27 @@ const WEDDING = {
 
   /* ---------- 6. SECTION: PHOTO GALLERY ----------
      Drop your photos into  assets/images/  and list the filenames here.
-     Leave the list empty  ( photos: [] )  to hide the gallery entirely. */
+     Leave the list empty  ( photos: [] )  to hide the gallery entirely.
+     This renders as a collage, not a plain grid: the first photo is
+     always the big heart-masked one, and every photo after it cycles
+     through a tall pair, a wide banner, then a square pair - repeating
+     for however many you add. Six photos (this one plus five more)
+     fills that pattern exactly once with nothing left over, which is
+     why six is the number that looks most deliberate - but any count
+     works, including just one or two. */
   gallery: {
     heading: "Our Moments",
+    /* Order here IS the layout - position decides which tile each photo
+       becomes. Current roles, in order:
+         1 heart  2 tall  3 tall  4 wide banner  5 square  6 square  7 tall */
     photos: [
-      { src: "assets/images/photo-1.jpg", alt: "Ayush and Yashika in the hills" },
-      { src: "assets/images/photo-2.jpg", alt: "Ayush and Yashika together" }
+      { src: "assets/images/photo-1.jpg", alt: "Ayush and Yashika on a hill road" },
+      { src: "assets/images/photo-3.jpg", alt: "Ayush and Yashika among the pines" },
+      { src: "assets/images/photo-4.jpg", alt: "Ayush and Yashika in the mountains" },
+      { src: "assets/images/photo-5.jpg", alt: "Ayush and Yashika at the beach" },
+      { src: "assets/images/photo-2.jpg", alt: "Ayush and Yashika together" },
+      { src: "assets/images/photo-6.jpg", alt: "Ayush and Yashika on the balcony" },
+      { src: "assets/images/photo-7.jpg", alt: "Ayush and Yashika at a cafe" }
     ]
   },
 

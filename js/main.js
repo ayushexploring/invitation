@@ -126,6 +126,14 @@
     });
   }
 
+  /* A collage, not a uniform grid: the first photo is the heart-masked
+     hero (full width), then tiles cycle through a tall portrait pair,
+     a full-width wide banner, and a square pair - repeating for however
+     many photos follow. Six photos (the hero plus one full cycle) tiles
+     perfectly with nothing left over; other counts still lay out fine,
+     see the "lone tile" handling below. */
+  var GALLERY_CYCLE = ['half-tall', 'half-tall', 'wide', 'half-sq', 'half-sq'];
+
   function renderGallery() {
     var sec  = $('#gallerySec');
     var grid = $('#galleryGrid');
@@ -133,8 +141,11 @@
     sec.hidden = photos.length === 0;
     if (!photos.length) return;
     grid.innerHTML = '';
-    photos.forEach(function (p) {
+
+    photos.forEach(function (p, i) {
+      var role = (i === 0) ? 'hero' : GALLERY_CYCLE[(i - 1) % GALLERY_CYCLE.length];
       var fig = document.createElement('figure');
+      fig.className = 'g-' + role;
       var img = document.createElement('img');
       img.src = p.src;
       img.alt = p.alt || '';
@@ -142,6 +153,19 @@
       fig.appendChild(img);
       grid.appendChild(fig);
     });
+
+    /* A half-width tile is left alone in its row only when it is the
+       very last photo AND it was meant to be the FIRST half of its pair
+       (cycle position 0 or 3) - its partner would have been the next
+       photo, which does not exist. Widen and center it instead of
+       leaving an empty gap beside it. */
+    var lastIndex = photos.length - 1;
+    if (lastIndex > 0) {
+      var relIndex = (lastIndex - 1) % GALLERY_CYCLE.length;
+      if (relIndex === 0 || relIndex === 3) {
+        grid.lastElementChild.classList.add('g-lone');
+      }
+    }
   }
 
   function renderInfo() {

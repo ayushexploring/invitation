@@ -580,35 +580,48 @@ body.opened .invite{ opacity:1 }
 .sec-gallery{ background:var(--cream) }
 .gallery-grid{
   margin-top:26px;
-  display:grid; grid-template-columns:repeat(2,1fr); gap:12px;
+  display:grid; grid-template-columns:repeat(2,1fr); gap:10px;
 }
 .gallery-grid figure{ margin:0; border-radius:10px; overflow:hidden; box-shadow:var(--shadow-soft) }
-.gallery-grid img{ width:100%; height:100%; aspect-ratio:3/4; object-fit:cover }
-/* first photo spans both columns and gets the heart mask */
-.gallery-grid figure:first-child{
+.gallery-grid img{ width:100%; height:100%; aspect-ratio:3/4; object-fit:cover; display:block }
+
+/* the hero photo: heart-masked, spans both columns. Which photo gets
+   each role is decided in JS (renderGallery in main.js), not by DOM
+   position, so the roles below are matched by class, not :first-child
+   or :nth-child. */
+.gallery-grid .g-hero{
   grid-column:1/-1;
   border-radius:0; box-shadow:none;
   /* This heart shape is taller than it is wide, and its true height
-     (~253px) exceeded the old 240px box outright - even centering it
-     couldn't have avoided clipping. The image below is now given more
-     height to actually contain the shape, and every path y-value is
-     shifted +27 to center the shape inside that taller box. See the
-     matching note on .scratch-heart above for why raw coordinates need
-     shifting at all: clip-path: path() never auto-scales to its box. */
+     (~253px) exceeded a 240px box outright - even centering it couldn't
+     have avoided clipping. The image is given more height to actually
+     contain the shape, and every path y-value is shifted +27 to center
+     it inside that taller box. See the matching note on .scratch-heart
+     for why raw coordinates need shifting at all: clip-path: path()
+     never auto-scales to its box. */
   -webkit-clip-path:path('M160 259 C 50 195, 8 139, 8 95 A 64 64 0 0 1 160 71 A 64 64 0 0 1 312 95 C 312 139, 270 195, 160 259 Z');
   clip-path:path('M160 259 C 50 195, 8 139, 8 95 A 64 64 0 0 1 160 71 A 64 64 0 0 1 312 95 C 312 139, 270 195, 160 259 Z');
   justify-self:center; width:min(84vw,320px);
 }
-.gallery-grid figure:first-child img{ aspect-ratio:320/265 }
+.gallery-grid .g-hero img{ aspect-ratio:320/265 }
 
-/* If the last photo ends up alone in its row (an odd number of photos
-   after the heart-masked first one), center it instead of leaving it
-   pinned to the left column with an empty gap beside it. Since the
-   heart photo is always its own full-width row, the total figure count
-   is even exactly when the final grid photo is alone - this rule needs
-   no photo-count logic of its own to stay correct as photos are added
-   or removed. */
-.gallery-grid figure:last-child:nth-child(even){
+/* half-width portrait pair - this is also the grid's own default
+   aspect-ratio above, so no override needed here beyond the comment */
+.gallery-grid .g-half-tall img{ aspect-ratio:3/4 }
+
+/* a full-width, short banner strip - breaks the two-column rhythm so
+   the section doesn't read as one flat repeating grid */
+.gallery-grid .g-wide{ grid-column:1/-1 }
+.gallery-grid .g-wide img{ aspect-ratio:16/9 }
+
+/* half-width square pair */
+.gallery-grid .g-half-sq img{ aspect-ratio:1/1 }
+
+/* Set by renderGallery() when the very last photo would otherwise sit
+   alone in its row with an empty gap beside it - widened and centered
+   instead. See the comment above GALLERY_CYCLE in main.js for exactly
+   when this applies. */
+.gallery-grid .g-lone{
   grid-column:1/-1;
   justify-self:center;
   width:min(50vw,200px);
