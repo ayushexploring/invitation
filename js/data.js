@@ -41,12 +41,12 @@ const WEDDING = {
   /* ---------- 4. THE BIG DATE ----------
      IMPORTANT: this ONE value drives the countdown timer.
      Format: YYYY-MM-DDTHH:MM:SS+05:30   (+05:30 = India Standard Time) */
-  weddingDateTime: "2026-12-11T10:30:00+05:30",
+  weddingDateTime: "2026-12-11T18:00:00+05:30",
 
   // How the date is spelled out on the page. Keep it in step with the above.
   weddingDateText: "December 11, 2026",
   weddingDayText:  "Friday",
-  weddingTimeText: "10:30 AM onwards",
+  weddingTimeText: "6:00 PM onwards",
 
   // Used for the "Save the Date" calendar file
   calendar: {
@@ -85,19 +85,14 @@ const WEDDING = {
     heading: "Program Timeline",
     items: [
       {
-        title: "Guest Arrival",
-        when:  "Dec 11, 2026 - 10:00 AM",
-        note:  "We warmly welcome you."
+        title: "Pool Party",
+        when:  "Dec 11, 2026 - 11:00 AM",
+        note:  "Come relax and celebrate with us by the pool."
       },
       {
         title: "Wedding Ceremony",
-        when:  "Dec 11, 2026 - 10:30 AM",
+        when:  "Dec 11, 2026 - 6:00 PM",
         note:  "Your gracious presence is requested."
-      },
-      {
-        title: "Reception",
-        when:  "Dec 12, 2026 - 7:30 PM",
-        note:  "Dinner and celebration from 7:30 PM onwards."
       }
     ]
   },
@@ -134,18 +129,13 @@ const WEDDING = {
     heading: "Pre-Wedding Events",
     items: [
       {
-        title: "Mehendi",
-        when:  "Dec 8, 2026 - 9:30 PM",
-        where: "At Bride's Residence"
-      },
-      {
-        title: "Haldi",
-        when:  "Dec 9, 2026 - 8:30 AM",
-        where: "At Groom's Residence"
+        title: "Mehndi",
+        when:  "Dec 10, 2026 - 2:00 PM",
+        where: "Pleasant Tree Hotels"
       },
       {
         title: "Sangeet",
-        when:  "Dec 10, 2026 - 8:00 PM",
+        when:  "Dec 10, 2026 - Night",
         where: "Pleasant Tree Hotels"
       }
     ]
