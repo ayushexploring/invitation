@@ -414,12 +414,11 @@ body.opened .invite{ opacity:1 }
   background:linear-gradient(180deg, rgba(255,255,255,.14) 0%, rgba(255,255,255,.06) 60%, rgba(255,255,255,.02) 100%);
   border:1px solid rgba(255,255,255,.22);
   box-shadow:0 0 60px rgba(120,160,210,.22), inset 0 0 40px rgba(255,255,255,.06);
-  /* Frosted enough that a real photo behind it reads as soft light and
-     color rather than distinguishable faces competing with the names
-     printed over them. The plain-gradient background barely needs this,
-     but it does no harm there either. */
-  -webkit-backdrop-filter:blur(14px) saturate(1.05);
-          backdrop-filter:blur(14px) saturate(1.05);
+  /* Frosted enough to keep the names legible over a real photo, but not
+     so much that the couple becomes unrecognizable behind their own
+     names - 8px keeps faces softly identifiable rather than dissolved. */
+  -webkit-backdrop-filter:blur(8px) saturate(1.05);
+          backdrop-filter:blur(8px) saturate(1.05);
 }
 .hero-inner{ color:#F3EAE6; text-align:center }
 
@@ -487,9 +486,14 @@ body.opened .invite{ opacity:1 }
   position:relative;
   width:min(70vw,240px);
   aspect-ratio:1/.92;
-  /* heart shape, used by both the reveal layer and the canvas */
-  -webkit-clip-path:path('M120 202 C 38 148, 6 98, 6 62 A 56 56 0 0 1 120 40 A 56 56 0 0 1 234 62 C 234 98, 202 148, 120 202 Z');
-  clip-path:path('M120 202 C 38 148, 6 98, 6 62 A 56 56 0 0 1 120 40 A 56 56 0 0 1 234 62 C 234 98, 202 148, 120 202 Z');
+  /* heart shape, used by both the reveal layer and the canvas.
+     clip-path: path() coordinates are literal pixels from the box's
+     top-left - they do NOT auto-scale to fit the element, unlike an SVG
+     viewBox. The heart's two lobes peaked above y=0 in the original
+     coordinates and were silently sliced flat by the box edge; every
+     y-value here is shifted +13 so the full shape sits inside the box. */
+  -webkit-clip-path:path('M120 215 C 38 161, 6 111, 6 75 A 56 56 0 0 1 120 53 A 56 56 0 0 1 234 75 C 234 111, 202 161, 120 215 Z');
+  clip-path:path('M120 215 C 38 161, 6 111, 6 75 A 56 56 0 0 1 120 53 A 56 56 0 0 1 234 75 C 234 111, 202 161, 120 215 Z');
   filter:drop-shadow(0 10px 22px rgba(139,30,45,.20));
   /* stop the drag from selecting the date text underneath */
   -webkit-user-select:none; user-select:none;
@@ -566,11 +570,18 @@ body.opened .invite{ opacity:1 }
 .gallery-grid figure:first-child{
   grid-column:1/-1;
   border-radius:0; box-shadow:none;
-  -webkit-clip-path:path('M160 232 C 50 168, 8 112, 8 68 A 64 64 0 0 1 160 44 A 64 64 0 0 1 312 68 C 312 112, 270 168, 160 232 Z');
-  clip-path:path('M160 232 C 50 168, 8 112, 8 68 A 64 64 0 0 1 160 44 A 64 64 0 0 1 312 68 C 312 112, 270 168, 160 232 Z');
+  /* This heart shape is taller than it is wide, and its true height
+     (~253px) exceeded the old 240px box outright - even centering it
+     couldn't have avoided clipping. The image below is now given more
+     height to actually contain the shape, and every path y-value is
+     shifted +27 to center the shape inside that taller box. See the
+     matching note on .scratch-heart above for why raw coordinates need
+     shifting at all: clip-path: path() never auto-scales to its box. */
+  -webkit-clip-path:path('M160 259 C 50 195, 8 139, 8 95 A 64 64 0 0 1 160 71 A 64 64 0 0 1 312 95 C 312 139, 270 195, 160 259 Z');
+  clip-path:path('M160 259 C 50 195, 8 139, 8 95 A 64 64 0 0 1 160 71 A 64 64 0 0 1 312 95 C 312 139, 270 195, 160 259 Z');
   justify-self:center; width:min(84vw,320px);
 }
-.gallery-grid figure:first-child img{ aspect-ratio:320/240 }
+.gallery-grid figure:first-child img{ aspect-ratio:320/265 }
 
 /* If the last photo ends up alone in its row (an odd number of photos
    after the heart-masked first one), center it instead of leaving it
