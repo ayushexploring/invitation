@@ -37,23 +37,37 @@
   <div class="env-stage">
     <div class="envelope" id="envelope">
 
-      <!-- the card that slides out -->
-      <div class="env-card" id="envCard">
-        <div class="env-card-inner">
-          <span class="env-card-orn">&#9670;</span>
-          <p class="env-card-kicker" data-ui="youAreInvited"></p>
-          <p class="env-card-names">
-            <span data-field="couple.groom.name"></span>
-            <em>&amp;</em>
-            <span data-field="couple.bride.name"></span>
-          </p>
-          <span class="env-card-rule"></span>
-          <p class="env-card-date" data-field="weddingDateText"></p>
-        </div>
-      </div>
-
       <!-- envelope body -->
       <div class="env-back"></div>
+
+      <!-- The couple's names, printed inside the cavity rather than on a
+           card that slides out - a full card here was what buried the
+           dark interior and the glow under solid white the moment the
+           flap moved, which was the actual bug behind the whole opening
+           reading as flat. Sitting on the interior instead, this only
+           ever occupies the region the flap itself used to cover, so it
+           appears lit by the glow rising from below it rather than
+           competing with that effect. -->
+      <div class="env-reveal">
+        <span class="env-reveal-orn">&#9670;</span>
+        <p class="env-reveal-kicker" data-ui="youAreInvited"></p>
+        <p class="env-reveal-names">
+          <span data-field="couple.groom.name"></span>
+          <em>&amp;</em>
+          <span data-field="couple.bride.name"></span>
+        </p>
+        <span class="env-reveal-rule"></span>
+        <p class="env-reveal-date" data-field="weddingDateText"></p>
+      </div>
+
+      <!-- Light building up inside the envelope, and sparkles carried out
+           on it. Both sit BELOW the pocket in the stacking order on
+           purpose: the pocket's front panel occludes their lower half, so
+           the light reads as spilling up out of the opening rather than
+           as a flash laid over the whole screen. -->
+      <div class="env-glow" id="envGlow" aria-hidden="true"></div>
+      <div class="env-sparkles" id="envSparkles" aria-hidden="true"></div>
+
       <div class="env-pocket"></div>
       <div class="env-flap" id="envFlap"></div>
 
@@ -86,8 +100,15 @@
       </p>
     </div>
   </div>
-  <div class="light-burst" id="lightBurst"></div>
 </div>
+
+<!-- Sits OUTSIDE .envelope-screen on purpose: the screen fades itself
+     out on the same beat this burst fires, and a child's own animated
+     opacity multiplies with a fading parent's - the burst was getting
+     cut down to nothing within its first couple of frames when it lived
+     inside that fade. As an independent sibling its own keyframes are
+     the only thing controlling how bright it is. -->
+<div class="light-burst" id="lightBurst"></div>
 
 
 <!-- ============ FLOATING CONTROLS ============ -->

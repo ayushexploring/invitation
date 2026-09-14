@@ -71,13 +71,26 @@ h1,h2,h3,p{margin:0}
   perspective:2400px;
 }
 
+/* The envelope starts slightly oversized, as though the camera is held
+   close to it, and eases back to its true size across the whole opening.
+   That slow pull-back is most of what gives the reference its cinematic
+   feel - a flap rotating at a fixed scale reads flat by comparison.
+   Order matters below: .launch must come after .open, since both carry
+   the same specificity and the later rule wins once both are applied. */
 .envelope{
   position:absolute; inset:0;
   transform-style:preserve-3d;
-  transition:transform 1s cubic-bezier(.6,.05,.3,1), opacity .8s ease;
+  transform:scale(1.14);
+  transition:transform 2.6s cubic-bezier(.22,.61,.36,1), opacity .7s ease;
   cursor:pointer;
 }
-.envelope.launch{ transform:scale(1.3) translateY(-4%); opacity:0 }
+.envelope.open{ transform:scale(1) }
+/* then the camera pushes forward through the opening into the light */
+.envelope.launch{
+  transform:scale(1.45);
+  opacity:0;
+  transition:transform 1.1s cubic-bezier(.5,0,.75,0), opacity .75s ease .15s;
+}
 
 /* --- embossed floral paper, shared by all envelope faces --- */
 .env-back,.env-pocket,.env-flap{
@@ -87,41 +100,65 @@ h1,h2,h3,p{margin:0}
   background-size:38px 38px;
 }
 
-/* .env-back doubles as the envelope's inner lining - it is completely
-   hidden while the flap is closed, and becomes the gold interior once
-   the flap turns over. */
+/* .env-back is the envelope's inside - completely hidden while the flap
+   is closed, and revealed as the flap turns over. A dark cavity, not the
+   bright gold this used to be: looking into an envelope should read as
+   depth, and a flat bright panel reads as a lid rather than an interior.
+   The light catch along the top is where the opening would catch the
+   room. */
 .env-back{
-  background-color:#8C6B38;
-  background-image:linear-gradient(165deg,#C9A967 0%,#A8843F 45%,#7E5F2B 100%);
+  background-color:#4A2C36;
+  background-image:
+    radial-gradient(120% 70% at 50% 0%, rgba(255,228,214,.20) 0%, rgba(255,228,214,0) 62%),
+    linear-gradient(180deg, #6A434F 0%, #4C2E38 48%, #35202A 100%);
   /* The shared rule above tiles at 38px for the floral texture. Without
-     this the gold gradient inherits that tiling and stripes into bars. */
-  background-size:100% 100%;
+     this the gradients inherit that tiling and stripe into bars. */
+  background-size:100% 100%, 100% 100%;
 }
 
-/* the card that slides out */
-.env-card{
-  position:absolute; left:7%; right:7%; top:6%; bottom:12%;
-  z-index:2;
+/* A real card, sized deliberately smaller than the one that used to
+   live here: that one spanned ~86% of the envelope's width and ~82% of
+   its height, which buried the dark cavity, the glow and the sparkles
+   under solid white the instant it rose. This one is narrower and
+   shorter, so the cavity stays visible in the margins around it while
+   it is out.
+
+   It starts pushed down by more than its own height (translateY 130%)
+   so it begins fully hidden behind the pocket regardless of where its
+   own top edge sits, then rises to rest with its lower third still
+   tucked behind the pocket's front face - genuinely emerging from it,
+   the way a card slides part-way out of a real envelope, rather than
+   simply fading into view in place. z-index 2 keeps it below the
+   pocket (3) so that tucked lower portion is actually hidden, and above
+   the glow (1) so it doesn't look transparent where the two overlap. */
+.env-reveal{
+  position:absolute; z-index:2;
+  left:19%; right:19%; top:5%; bottom:36%;
+  border-radius:8px;
   background:linear-gradient(165deg,#FFFDFC 0%,#FCF2EE 100%);
-  border-radius:6px;
-  box-shadow:0 10px 30px rgba(74,52,55,.28);
-  display:grid; place-items:center;
-  transition:transform 1s cubic-bezier(.34,1.2,.4,1);
+  box-shadow:0 14px 34px rgba(35,15,20,.38);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding:6% 8%;
+  text-align:center;
+  transform:translateY(130%);
+  opacity:0;
+  transition:transform 1.1s cubic-bezier(.22,.8,.28,1) .5s, opacity .3s ease .5s;
 }
-/* The card rises until its lower edge is still tucked behind the pocket,
-   so it never appears to float free of the envelope. */
-.envelope.open .env-card{ transform:translateY(-24%) }
+.envelope.open .env-reveal{ transform:translateY(0); opacity:1 }
+.envelope.launch .env-reveal{ opacity:0; transition:opacity .3s ease }
 
-.env-card-inner{ text-align:center; padding:14px }
-.env-card-orn{ color:var(--gold); font-size:15px; display:block; margin-bottom:8px }
-.env-card-kicker{
+.env-reveal-orn{ color:var(--gold); font-size:14px; display:block; margin-bottom:6px }
+.env-reveal-kicker{
   font-size:9px; letter-spacing:.32em; text-transform:uppercase;
   color:var(--muted);
 }
-.env-card-names{ font-family:var(--script); font-size:30px; color:var(--maroon); line-height:1.15; margin:6px 0 }
-.env-card-names em{ font-size:17px; color:var(--gold); font-style:normal; display:block; margin:-2px 0 }
-.env-card-rule{ display:block; width:42px; height:1px; background:var(--gold); margin:8px auto }
-.env-card-date{ font-size:11px; letter-spacing:.12em; color:var(--muted) }
+.env-reveal-names{
+  font-family:var(--script); font-size:clamp(21px,6.8vw,28px);
+  color:var(--maroon); line-height:1.15; margin:6px 0;
+}
+.env-reveal-names em{ font-size:15px; color:var(--gold); font-style:normal; display:block; margin:-2px 0 }
+.env-reveal-rule{ display:block; width:38px; height:1px; background:var(--gold); margin:8px auto }
+.env-reveal-date{ font-size:11px; letter-spacing:.12em; color:var(--muted) }
 
 /* Front pocket: a V-shaped top edge, everything below it. Its shape is
    the exact complement of the flap below, so together the two tile the
@@ -175,10 +212,18 @@ h1,h2,h3,p{margin:0}
 /* fine + crisp: the decorative pinstripe the reference traces along
    the same seam */
 .env-fold-line .fold-pinstripe{ stroke:rgba(190,145,85,.85); stroke-width:2px }
-/* gold inner lining, seen once the flap turns over */
+/* The flap's underside, seen once it turns over. The back of the same
+   sheet of paper catching light from a shallower angle - dustier and
+   darker than its printed face, warming to gold near the fold where the
+   lining would show. A flat bright gold panel here read as a separate
+   object rather than the same flap turned around. */
 .env-flap::after{
   content:''; position:absolute; inset:0;
-  background:linear-gradient(180deg,var(--gold-lt),var(--gold));
+  background:linear-gradient(180deg,
+    #C8A3A0 0%,
+    #B88E8C 42%,
+    #C9A566 88%,
+    #D8BC84 100%);
   opacity:0; transition:opacity 0s .48s;
   clip-path:inherit;
 }
@@ -187,6 +232,63 @@ h1,h2,h3,p{margin:0}
 /* a flat line at rest on the pocket - it doesn't lift with the flap, so
    it fades out rather than staying stranded once the flap rotates away */
 .envelope.open .env-fold-line{ opacity:0 }
+
+/* ---- light growing inside the envelope ----
+   Anchored at the flap's point (the opening) and sitting below the
+   pocket in the stacking order, so the pocket's front panel cuts off its
+   lower half and the light reads as spilling UP out of the envelope.
+   This is the part the old version was missing most: a burst drawn over
+   the whole screen has no source, while this one visibly comes from
+   inside the envelope the guest just opened. */
+.env-glow{
+  position:absolute; z-index:1;
+  left:50%; top:56.1%;
+  width:150%; aspect-ratio:1;
+  margin:0; padding:0;
+  transform:translate(-50%,-50%) scale(0);
+  border-radius:50%;
+  pointer-events:none;
+  opacity:0;
+  background:radial-gradient(circle,
+    rgba(255,250,242,.98) 0%,
+    rgba(255,238,220,.85) 14%,
+    rgba(255,222,196,.45) 34%,
+    rgba(255,214,190,.12) 55%,
+    rgba(255,210,185,0) 72%);
+}
+.envelope.glow .env-glow{ animation:envGlow 1.9s cubic-bezier(.3,.5,.4,1) forwards }
+@keyframes envGlow{
+  0%   { opacity:0;   transform:translate(-50%,-50%) scale(.04) }
+  22%  { opacity:.85; transform:translate(-50%,-50%) scale(.26) }
+  60%  { opacity:1;   transform:translate(-50%,-50%) scale(.72) }
+  100% { opacity:1;   transform:translate(-50%,-50%) scale(1.25) }
+}
+
+/* ---- sparkles carried out on that light ----
+   Spawned in JS so each gets its own drift, delay and size; a fixed set
+   of CSS-only particles reads as a repeating pattern rather than glitter. */
+.env-sparkles{
+  position:absolute; z-index:5;
+  left:0; right:0; top:0; bottom:0;
+  pointer-events:none;
+  overflow:hidden;
+}
+.env-sparkles i{
+  position:absolute;
+  top:56.1%;
+  width:var(--sz,3px); height:var(--sz,3px);
+  margin:calc(var(--sz,3px) / -2) 0 0 calc(var(--sz,3px) / -2);
+  border-radius:50%;
+  background:#FFF6E8;
+  box-shadow:0 0 6px 1px rgba(255,228,190,.9);
+  opacity:0;
+}
+.envelope.glow .env-sparkles i{ animation:envSparkle var(--dur,1.6s) ease-out var(--delay,0s) forwards }
+@keyframes envSparkle{
+  0%   { opacity:0; transform:translate(0,0) scale(.4) }
+  18%  { opacity:1; transform:translate(calc(var(--dx,0px) * .25), -18%) scale(1) }
+  100% { opacity:0; transform:translate(var(--dx,0px), -78%) scale(.25) }
+}
 
 /* wax seal - sits exactly at the flap's point (56.1%), sized relative
    to the viewport so it holds a similar proportion on small and large
@@ -244,7 +346,11 @@ h1,h2,h3,p{margin:0}
 /* Starburst at the moment of opening: a soft core plus radiating rays,
    the way a sealed envelope catches the light as it springs open. */
 .light-burst{
-  position:absolute; inset:0; pointer-events:none;
+  /* fixed, not absolute - this is a direct child of body now, not of
+     .envelope-screen, specifically so its brightness is never multiplied
+     by that screen's own simultaneous fade-out. See the HTML comment
+     where it's placed. */
+  position:fixed; inset:0; z-index:101; pointer-events:none;
   background:radial-gradient(circle at 50% 52%, #fff 0%, rgba(255,255,255,.88) 16%, rgba(255,255,255,0) 58%);
   opacity:0;
 }

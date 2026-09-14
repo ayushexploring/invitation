@@ -186,29 +186,74 @@
   var screenEl = $('#envelopeScreen');
   var envelope = $('#envelope');
   var burst    = $('#lightBurst');
+  var sparkles = $('#envSparkles');
   var opened   = false;
 
+  /* Sparkles are built here rather than written into the HTML so each one
+     gets its own drift, delay, size and speed. A fixed set in the markup
+     reads as a repeating pattern; randomised ones read as glitter. */
+  function spawnSparkles() {
+    if (!sparkles) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var n = window.innerWidth < 520 ? 16 : 22;
+    for (var i = 0; i < n; i++) {
+      var s = document.createElement('i');
+      /* clustered near the opening, thinning out towards the edges */
+      var spread = (Math.random() + Math.random() - 1);      // -1..1, centre-weighted
+      s.style.left = (50 + spread * 26) + '%';
+      s.style.setProperty('--dx',    (Math.random() * 120 - 60).toFixed(0) + 'px');
+      s.style.setProperty('--sz',    (2 + Math.random() * 4).toFixed(1) + 'px');
+      s.style.setProperty('--dur',   (1.2 + Math.random() * 1.1).toFixed(2) + 's');
+      s.style.setProperty('--delay', (Math.random() * 0.55).toFixed(2) + 's');
+      sparkles.appendChild(s);
+    }
+  }
+
+  /* The opening runs in overlapping phases rather than one step: the seal
+     breaks and the flap lifts while the camera pulls back, light then
+     builds inside the envelope and carries sparkles out, and only then
+     does the burst take the screen and hand over to the invitation. */
   function openEnvelope() {
     if (opened) return;
     opened = true;
 
     startMusic();                       // a tap is the only moment browsers allow this
     screenEl.classList.add('opening');
-    envelope.classList.add('open');
+    envelope.classList.add('open');     // flap lifts, camera begins pulling back
 
+    /* light starts growing inside once the flap is most of the way open,
+       so it looks like it was always in there waiting */
+    setTimeout(function () {
+      envelope.classList.add('glow');
+    }, 850);
+
+    /* The burst, the camera push-through and the screen's own fade all
+       start on the SAME beat rather than one after another. That is
+       deliberate, not a simplification: the burst's own 1.1s of bright
+       rays is what the hero fades in underneath, so the handoff reads as
+       one continuous flash-through rather than the screen finishing its
+       own fade against flat pink first and the hero only appearing after
+       that - which is what firing these in sequence actually looked
+       like when checked frame by frame.
+       This beat sits a full second later than the card's own rise
+       finishes (~1.6s in), rather than right on top of it - the guest
+       gets a real moment to actually read the names and date before
+       everything moves on, instead of the card barely settling before
+       the burst starts taking over. */
     setTimeout(function () {
       burst.classList.add('flash');
-      envelope.classList.add('launch');
-    }, 1450);
-
-    setTimeout(function () {
+      envelope.classList.add('launch'); // camera pushes forward into the light
       screenEl.classList.add('gone');
       document.body.classList.remove('locked');
       document.body.classList.add('opened');
       revealVisible();                  // animate in whatever is already on screen
-    }, 2050);
+    }, 2750);
 
-    setTimeout(function () { screenEl.hidden = true; }, 2900);
+    /* the screen's own fade is .7s, so it is only safe to pull it out of
+       the layout after that has finished */
+    /* after both the screen's own .7s fade and the burst's 1.1s cycle
+       have finished, measured from the 2750ms beat both start on */
+    setTimeout(function () { screenEl.hidden = true; }, 3900);
   }
 
   $('#seal').addEventListener('click', openEnvelope);
@@ -600,6 +645,7 @@
   document.body.classList.add('locked');
 
   render();
+  spawnSparkles();      // must exist before the glow phase animates them
   initSaveDate();
   initMusic();
   initPetals();
