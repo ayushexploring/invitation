@@ -22,8 +22,8 @@ const WEDDING = {
      Choose a DARK photo - the names are printed in white over it.
      Raise overlay (0 to 1) to darken a photo that is too bright. */
   hero: {
-    image:   "",
-    overlay: 0.35
+    image:   "assets/images/hero.jpg",
+    overlay: 0.42
   },
 
   /* ---------- 3. THE COUPLE ---------- */
@@ -75,9 +75,8 @@ const WEDDING = {
   gallery: {
     heading: "Our Moments",
     photos: [
-      // { src: "assets/images/photo-1.jpg", alt: "Engagement" },
-      // { src: "assets/images/photo-2.jpg", alt: "Pre-wedding shoot" },
-      // { src: "assets/images/photo-3.jpg", alt: "Together" }
+      { src: "assets/images/photo-1.jpg", alt: "Ayush and Yashika in the hills" },
+      { src: "assets/images/photo-2.jpg", alt: "Ayush and Yashika together" }
     ]
   },
 

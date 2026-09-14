@@ -9,3 +9,12 @@ desktop.ini
 
 # local preview artifacts
 _preview-qr.png
+
+# Raw source photos dropped at the project root before processing.
+# One of these has been checked and carries GPS EXIF data revealing where
+# it was taken - never commit originals here, only the resized, metadata-
+# stripped copies that Python writes into assets/images/.
+hero-background.*
+firsr-photo-heart.*
+rest-of-the-grid.*
+whatsapp-preview.*

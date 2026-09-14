@@ -411,10 +411,15 @@ body.opened .invite{ opacity:1 }
   width:min(84vw,340px);
   padding:54px 24px 46px;
   border-radius:999px 999px 18px 18px;
-  background:linear-gradient(180deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,.04) 60%, rgba(255,255,255,0) 100%);
-  border:1px solid rgba(255,255,255,.20);
+  background:linear-gradient(180deg, rgba(255,255,255,.14) 0%, rgba(255,255,255,.06) 60%, rgba(255,255,255,.02) 100%);
+  border:1px solid rgba(255,255,255,.22);
   box-shadow:0 0 60px rgba(120,160,210,.22), inset 0 0 40px rgba(255,255,255,.06);
-  -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px);
+  /* Frosted enough that a real photo behind it reads as soft light and
+     color rather than distinguishable faces competing with the names
+     printed over them. The plain-gradient background barely needs this,
+     but it does no harm there either. */
+  -webkit-backdrop-filter:blur(14px) saturate(1.05);
+          backdrop-filter:blur(14px) saturate(1.05);
 }
 .hero-inner{ color:#F3EAE6; text-align:center }
 
@@ -566,6 +571,19 @@ body.opened .invite{ opacity:1 }
   justify-self:center; width:min(84vw,320px);
 }
 .gallery-grid figure:first-child img{ aspect-ratio:320/240 }
+
+/* If the last photo ends up alone in its row (an odd number of photos
+   after the heart-masked first one), center it instead of leaving it
+   pinned to the left column with an empty gap beside it. Since the
+   heart photo is always its own full-width row, the total figure count
+   is even exactly when the final grid photo is alone - this rule needs
+   no photo-count logic of its own to stay correct as photos are added
+   or removed. */
+.gallery-grid figure:last-child:nth-child(even){
+  grid-column:1/-1;
+  justify-self:center;
+  width:min(50vw,200px);
+}
 
 /* ============================================================
    9. COUNTDOWN
