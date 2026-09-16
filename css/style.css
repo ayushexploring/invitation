@@ -142,7 +142,13 @@ h1,h2,h3,p{margin:0}
   text-align:center;
   transform:translateY(130%);
   opacity:0;
-  transition:transform 1.1s cubic-bezier(.22,.8,.28,1) .5s, opacity .3s ease .5s;
+  /* Waits until the flap has actually finished (it now completes at
+     .2s delay + 1.05s = 1.25s) before it starts rising, instead of
+     starting at .5s while the flap is still mid-swing. The envelope
+     opening and the card emerging from it need to read as two distinct
+     things happening one after the other, not two motions racing each
+     other to the same finish line. */
+  transition:transform 1.1s cubic-bezier(.22,.8,.28,1) 1.45s, opacity .3s ease 1.45s;
 }
 .envelope.open .env-reveal{ transform:translateY(0); opacity:1 }
 .envelope.launch .env-reveal{ opacity:0; transition:opacity .3s ease }
@@ -182,7 +188,14 @@ h1,h2,h3,p{margin:0}
   clip-path:polygon(0 0, 100% 0, 100% 34.8%, 50% 56.1%, 0 34.8%);
   transform-origin:top center;
   transform:rotateX(0deg);
-  transition:transform .95s cubic-bezier(.6,.02,.3,1), z-index 0s .45s;
+  /* Delayed .2s behind the seal breaking away, and a touch slower than
+     before (.95s -> 1.05s) - both on purpose. Started on the same beat
+     as the seal, this and the seal's own break blurred into one motion
+     instead of reading as two things happening in sequence: the seal
+     lifts off, THEN the flap swings open. Checked against the reference
+     frame by frame - that gap between the two is exactly what makes its
+     opening read as literal rather than as everything happening at once. */
+  transition:transform 1.05s cubic-bezier(.6,.02,.3,1) .2s, z-index 0s .65s;
   backface-visibility:hidden;
 }
 /* Light gathers near the hinge at the top, shadow gathers where the

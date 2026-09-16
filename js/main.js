@@ -221,11 +221,19 @@
     screenEl.classList.add('opening');
     envelope.classList.add('open');     // flap lifts, camera begins pulling back
 
-    /* light starts growing inside once the flap is most of the way open,
-       so it looks like it was always in there waiting */
+    /* The sequence now reads as three distinct beats rather than
+       everything moving at once, matched against the reference frame by
+       frame: the seal breaks away first (CSS, no delay), THEN the flap
+       swings open (CSS, .2s delay - see the comment on .env-flap), and
+       only once that has actually finished (1.25s) does the card begin
+       to rise (CSS, 1.45s delay - see the comment on .env-reveal). The
+       timeouts below just pick up the story from there.
+
+       Light starts growing right as the flap finishes settling, so it
+       looks like it was always in there waiting to be uncovered. */
     setTimeout(function () {
       envelope.classList.add('glow');
-    }, 850);
+    }, 1100);
 
     /* The burst, the camera push-through and the screen's own fade all
        start on the SAME beat rather than one after another. That is
@@ -235,11 +243,10 @@
        own fade against flat pink first and the hero only appearing after
        that - which is what firing these in sequence actually looked
        like when checked frame by frame.
-       This beat sits a full second later than the card's own rise
-       finishes (~1.6s in), rather than right on top of it - the guest
-       gets a real moment to actually read the names and date before
-       everything moves on, instead of the card barely settling before
-       the burst starts taking over. */
+       This beat sits well after the card's own rise finishes (1.45s
+       delay + 1.1s = 2.55s), giving the guest a real moment to actually
+       read the names and date before everything moves on, instead of
+       the card barely settling before the burst starts taking over. */
     setTimeout(function () {
       burst.classList.add('flash');
       envelope.classList.add('launch'); // camera pushes forward into the light
@@ -247,13 +254,13 @@
       document.body.classList.remove('locked');
       document.body.classList.add('opened');
       revealVisible();                  // animate in whatever is already on screen
-    }, 2750);
+    }, 4250);
 
     /* the screen's own fade is .7s, so it is only safe to pull it out of
        the layout after that has finished */
     /* after both the screen's own .7s fade and the burst's 1.1s cycle
-       have finished, measured from the 2750ms beat both start on */
-    setTimeout(function () { screenEl.hidden = true; }, 3900);
+       have finished, measured from the 4250ms beat both start on */
+    setTimeout(function () { screenEl.hidden = true; }, 5400);
   }
 
   $('#seal').addEventListener('click', openEnvelope);
