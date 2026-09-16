@@ -925,6 +925,22 @@ body.opened .invite{ opacity:1 }
    14. CLOSING
    ============================================================ */
 
+/* A small decorative touch between the practical info cards and the
+   closing message - background matches the peach the sections either
+   side of it already use (--paper/#FBF0EC are the same family), and the
+   source PNG had its own background removed before saving, so there is
+   no seam or box around the art itself, just the couple sitting on the
+   page's own colour. */
+.sec-blessing{
+  background:var(--paper);
+  display:grid; place-items:center;
+  padding:8px 0 0;
+}
+.blessing-art{
+  width:min(46vw,190px); height:auto;
+  filter:drop-shadow(0 8px 16px rgba(74,52,55,.14));
+}
+
 .sec-closing{
   background:#FBF0EC;
   padding-block:56px 90px;
