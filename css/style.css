@@ -79,7 +79,22 @@ h1,h2,h3,p{margin:0}
    the same specificity and the later rule wins once both are applied. */
 .envelope{
   position:absolute; inset:0;
-  transform-style:preserve-3d;
+  /* NOT preserve-3d - this was the actual bug behind the flap never
+     visibly opening. .env-back sits flat at its default Z=0; the
+     instant .env-flap gets ANY nonzero rotateX, true 3D depth-sorting
+     (which preserve-3d switches on) puts almost the entire tilted flap
+     plane at a slightly negative Z - further from the camera than the
+     untransformed .env-back - so the compositor paints .env-back on top
+     of it. Confirmed directly: even rotateX(-1deg) was enough to hide
+     the flap completely, and it stayed completely hidden at every angle
+     tested up to -172deg, regardless of z-index, clip-path, or
+     backface-visibility - none of those were ever the actual cause.
+     Removing preserve-3d makes stacking follow z-index again like
+     normal 2D layers, while perspective (set on the ancestor .env-stage)
+     still reaches .env-flap's own rotation fine and still foreshortens
+     it properly through the whole sweep - confirmed by forcing fixed
+     angles and watching the visible flap height shrink correctly as the
+     angle increases, rather than snapping straight to invisible. */
   transform:scale(1.14);
   transition:transform 2.6s cubic-bezier(.22,.61,.36,1), opacity .7s ease;
   cursor:pointer;
@@ -137,8 +152,14 @@ h1,h2,h3,p{margin:0}
   border-radius:8px;
   background:linear-gradient(165deg,#FFFDFC 0%,#FCF2EE 100%);
   box-shadow:0 14px 34px rgba(35,15,20,.38);
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  padding:6% 8%;
+  /* justify-content:center used to center this content against the
+     card's FULL height - but a good third of that box sits hidden
+     behind the pocket once risen, so centering against the whole thing
+     pulled the visible content down and left a wide empty band above
+     the diamond ornament. Aligning to the top and controlling the gap
+     with padding instead puts the content where it's actually seen. */
+  display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
+  padding:34px 8% 6%;
   text-align:center;
   transform:translateY(130%);
   opacity:0;
@@ -154,6 +175,10 @@ h1,h2,h3,p{margin:0}
 .envelope.launch .env-reveal{ opacity:0; transition:opacity .3s ease }
 
 .env-reveal-orn{ color:var(--gold); font-size:14px; display:block; margin-bottom:6px }
+/* the bottom ornament mirrors the top one - margin-top instead of
+   margin-bottom, since it sits after the date rather than before the
+   kicker */
+.env-reveal-orn-bottom{ margin-bottom:0; margin-top:10px }
 .env-reveal-kicker{
   font-size:9px; letter-spacing:.32em; text-transform:uppercase;
   color:var(--muted);
@@ -196,7 +221,22 @@ h1,h2,h3,p{margin:0}
      frame by frame - that gap between the two is exactly what makes its
      opening read as literal rather than as everything happening at once. */
   transition:transform 1.05s cubic-bezier(.6,.02,.3,1) .2s, z-index 0s .65s;
-  backface-visibility:hidden;
+  /* NOT hidden - this was the actual missing piece. backface-visibility:
+     hidden makes the ENTIRE element disappear, pseudo-elements included,
+     the instant its rotation crosses 90 degrees toward the camera. Since
+     the flap travels to -172deg, that culling was silencing it for
+     roughly the back half of its own swing: for that whole stretch there
+     was no flap, no lining, nothing - just a jump straight to the flat
+     dark cavity mid-motion, which is exactly what reads as "not a real
+     animation" rather than a flap physically folding open and coming to
+     rest. Confirmed directly: latency-corrected screenshots through the
+     full rotation window were pixel-identical flat cavity, no visible
+     flap object at any point past the very first fraction of the swing.
+     Left visible, the flap (with its own ::before top-light/bottom-
+     shadow and ::after gold-lining, both already designed to phase in
+     over the course of the motion) stays a continuously visible object
+     for the whole arc, the way an actual paper flap folding back would. */
+  backface-visibility:visible;
 }
 /* Light gathers near the hinge at the top, shadow gathers where the
    fold presses down against the pocket at the bottom - a paper surface
@@ -237,7 +277,12 @@ h1,h2,h3,p{margin:0}
     #B88E8C 42%,
     #C9A566 88%,
     #D8BC84 100%);
-  opacity:0; transition:opacity 0s .48s;
+  /* A real fade rather than a snap, timed to land in the second half of
+     the flap's own .2s-1.25s rotation window - roughly when the flap
+     would actually be turning enough to start catching the light
+     differently, now that it stays visible long enough for that to
+     matter. */
+  opacity:0; transition:opacity .4s ease .55s;
   clip-path:inherit;
 }
 .envelope.open .env-flap{ transform:rotateX(-172deg); z-index:1 }

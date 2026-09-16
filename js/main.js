@@ -137,6 +137,10 @@
   function renderGallery() {
     var sec  = $('#gallerySec');
     var grid = $('#galleryGrid');
+    // The whole section can be commented out of index.html to switch it
+    // off at the markup level rather than just hiding it - this guard
+    // means that's safe to do without also touching this file.
+    if (!sec || !grid) return;
     var photos = WEDDING.gallery.photos || [];
     sec.hidden = photos.length === 0;
     if (!photos.length) return;
