@@ -1094,11 +1094,15 @@ body.scrolled .scroll-cue{ opacity:0; transition-delay:0s }
   letter-spacing:.06em;
 }
 
+/* A real photo of the venue now, replacing the line-drawn pavilion that
+   used to sit here. Sized closer to the gallery's own wide-banner tile
+   (16:9, rounded, soft shadow) so it reads as part of the same photo
+   language as the rest of the page, not a separate illustration style. */
 .venue-art{
   display:block;
-  width:min(66vw,230px); height:auto;
+  width:min(84vw,320px); aspect-ratio:16/9;
+  object-fit:cover;
   margin:22px auto 4px;
-  fill:none; stroke:var(--rose-line);
-  stroke-width:1.1; stroke-linecap:round; stroke-linejoin:round;
-  opacity:.9;
+  border-radius:10px;
+  box-shadow:var(--shadow-soft);
 }

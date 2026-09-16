@@ -162,7 +162,7 @@ const WEDDING = {
     transportation: {
       show: true,
       heading: "Transportation",
-      text: "Pleasant Tree Hotels is close to Dehradun's Jolly Grant Airport, on the road toward Mussoorie. Do tell us if you need help arranging a pickup."
+      text: "Pleasant Tree Hotels is close to Dehradun's Jolly Grant Airport, on the road toward Mussoorie."
     },
     accommodation: {
       show: true,
