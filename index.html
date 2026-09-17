@@ -69,7 +69,20 @@
       <div class="env-glow" id="envGlow" aria-hidden="true"></div>
       <div class="env-sparkles" id="envSparkles" aria-hidden="true"></div>
 
-      <div class="env-pocket"></div>
+      <!-- Two decorated-elephant motifs facing each other on the pocket's
+           face - a nod to a traditional Indian wedding procession rather
+           than the plain floral texture alone. Same source image both
+           times; the right-hand one is mirrored with CSS scaleX(-1) so
+           its head/trunk point inward, toward the left-hand one, instead
+           of both facing the same way. Both live INSIDE .env-pocket on
+           purpose: that div's own clip-path already confines them to
+           exactly the visible pocket area, so neither can poke out above
+           the V line where the flap folds, or below where the pocket
+           ends. -->
+      <div class="env-pocket">
+        <img class="env-motif env-motif-l" src="assets/images/elephant.webp" alt="">
+        <img class="env-motif env-motif-r" src="assets/images/elephant.webp" alt="">
+      </div>
       <div class="env-flap" id="envFlap"></div>
 
       <!-- The fold seam, drawn as an exact line rather than a shadow.

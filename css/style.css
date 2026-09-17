@@ -148,18 +148,20 @@ h1,h2,h3,p{margin:0}
    the glow (1) so it doesn't look transparent where the two overlap. */
 .env-reveal{
   position:absolute; z-index:2;
-  left:19%; right:19%; top:5%; bottom:36%;
+  left:19%; right:19%; top:5%; bottom:58%;
   border-radius:8px;
   background:linear-gradient(165deg,#FFFDFC 0%,#FCF2EE 100%);
   box-shadow:0 14px 34px rgba(35,15,20,.38);
-  /* justify-content:center used to center this content against the
-     card's FULL height - but a good third of that box sits hidden
-     behind the pocket once risen, so centering against the whole thing
-     pulled the visible content down and left a wide empty band above
-     the diamond ornament. Aligning to the top and controlling the gap
-     with padding instead puts the content where it's actually seen. */
-  display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
-  padding:34px 8% 6%;
+  /* justify-content:flex-start (and, before that, :center) both anchored
+     every gap to one end, so whichever end had the leftover room read as
+     an obvious dead band. space-evenly puts that leftover room between
+     every pair of elements AND at both edges instead, so the ornament,
+     kicker, names, rule and date all sit an even distance apart - which
+     is also why the box itself is shorter now (bottom 36% -> 58%): a
+     tall box with only ~200px of actual content would just turn those
+     even gaps into oversized ones. */
+  display:flex; flex-direction:column; align-items:center; justify-content:space-evenly;
+  padding:14px 8%;
   text-align:center;
   transform:translateY(130%);
   opacity:0;
@@ -205,6 +207,28 @@ h1,h2,h3,p{margin:0}
   z-index:3;
   clip-path:polygon(0 34.8%, 50% 56.1%, 100% 34.8%, 100% 100%, 0 100%);
 }
+
+/* The elephant motifs sit low in the pocket, in the room the shorter
+   card (see .env-reveal above) now leaves free below it. Kept faint -
+   they're a background flourish the card reads over, not a competing
+   graphic - and they fade in on the same beat as the glow rather than
+   popping in with the flap, since they're part of the interior the
+   light is revealing. */
+.env-motif{
+  position:absolute; z-index:1;
+  top:78%;
+  width:min(32vw,124px); height:auto;
+  opacity:0;
+  transition:opacity 1.1s ease;
+}
+/* the source art faces right (head/trunk toward its own higher-x side)
+   - on the left that reads as facing inward already, and on the right
+   it's mirrored with scaleX(-1) so it faces inward too, rather than
+   both looking the same way */
+.env-motif-l{ left:24%; transform:translate(-50%,-50%) }
+.env-motif-r{ left:76%; transform:translate(-50%,-50%) scaleX(-1) }
+.envelope.open .env-motif{ opacity:.5; transition:opacity 1.3s ease .95s }
+.envelope.launch .env-motif{ opacity:0; transition:opacity .3s ease }
 
 /* The flap: a pentagon - flat across the top, straight down the sides,
    then angled to a point in the middle. Hinged along its top edge. */
