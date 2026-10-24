@@ -41,18 +41,18 @@ const WEDDING = {
   /* ---------- 4. THE BIG DATE ----------
      IMPORTANT: this ONE value drives the countdown timer.
      Format: YYYY-MM-DDTHH:MM:SS+05:30   (+05:30 = India Standard Time) */
-  weddingDateTime: "2026-12-11T18:00:00+05:30",
+  weddingDateTime: "2026-12-04T18:00:00+05:30",
 
   // How the date is spelled out on the page. Keep it in step with the above.
-  weddingDateText: "December 11, 2026",
-  weddingDayText:  "Friday",
-  weddingTimeText: "6:00 PM onwards",
+  weddingDateText: "December 4 & 5, 2026",
+  weddingDayText:  "Friday & Saturday",
+  weddingTimeText: "Celebrations begin 6:00 PM",
 
   // Used for the "Save the Date" calendar file
   calendar: {
     title:    "Wedding of Ayush & Yashika",
     hours:    4,
-    location: "Pleasant Tree Hotels, Jamniwala, Guniyal Gaon, Dehradun, Uttarakhand"
+    location: "Naturoville Wellness Resort, Dehradun Road, Rishikesh, Uttarakhand"
   },
 
   /* ---------- 5. SECTION: SCRATCH TO REVEAL ---------- */
@@ -100,14 +100,14 @@ const WEDDING = {
     heading: "Program Timeline",
     items: [
       {
-        title: "Pool Party",
-        when:  "Dec 11, 2026 - 11:00 AM",
-        note:  "Come relax and celebrate with us by the pool."
+        title: "Haldi",
+        when:  "Dec 5, 2026 - 9:00 AM",
+        note:  "Join us for a morning of turmeric, laughter and love."
       },
       {
-        title: "Wedding Ceremony",
-        when:  "Dec 11, 2026 - 6:00 PM",
-        note:  "Your gracious presence is requested."
+        title: "Baarat",
+        when:  "Dec 5, 2026 - 6:00 PM",
+        note:  "Dance with us as the baarat arrives."
       }
     ]
   },
@@ -115,10 +115,10 @@ const WEDDING = {
   /* ---------- 9. SECTION: VENUE ---------- */
   venue: {
     heading: "Venue",
-    name:    "Pleasant Tree Hotels",
-    address: "Near Abhimanyu Cricket Academy, Jamniwala,\nGuniyal Gaon, Dehradun, Uttarakhand 248001",
+    name:    "Naturoville Wellness Resort",
+    address: "Dehradun Road,\nRishikesh, Uttarakhand",
     // Paste ANY Google Maps share link here
-    mapsUrl:   "https://maps.google.com/?q=Pleasant+Tree+Hotels+Jamniwala+Guniyal+Gaon+Dehradun+Uttarakhand",
+    mapsUrl:   "https://maps.google.com/?q=Naturoville+Wellness+Resort+Dehradun+Road+Rishikesh+Uttarakhand",
     mapsLabel: "View on Google Maps"
   },
 
@@ -144,14 +144,14 @@ const WEDDING = {
     heading: "Pre-Wedding Events",
     items: [
       {
-        title: "Mehndi",
-        when:  "Dec 10, 2026 - 2:00 PM",
-        where: "Pleasant Tree Hotels"
+        title: "Engagement",
+        when:  "Dec 4, 2026 - 6:00 PM",
+        where: "Naturoville Wellness Resort"
       },
       {
         title: "Sangeet",
-        when:  "Dec 10, 2026 - Night",
-        where: "Pleasant Tree Hotels"
+        when:  "Dec 4, 2026 - 6:00 PM",
+        where: "Naturoville Wellness Resort"
       }
     ]
   },
@@ -162,12 +162,12 @@ const WEDDING = {
     transportation: {
       show: true,
       heading: "Transportation",
-      text: "Pleasant Tree Hotels is close to Dehradun's Jolly Grant Airport, on the road toward Mussoorie."
+      text: "Naturoville Wellness Resort is on Dehradun Road in Rishikesh, close to Jolly Grant Airport."
     },
     accommodation: {
       show: true,
       heading: "Accommodation",
-      text: "Rooms are arranged at Pleasant Tree Hotels for guests travelling in. Please let us know your dates."
+      text: "Rooms are arranged at Naturoville Wellness Resort for guests travelling in. Please let us know your dates."
     },
     gifts: {
       show: true,
