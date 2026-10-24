@@ -67,9 +67,6 @@
     renderGallery();
     renderInfo();
 
-    /* --- dress code section --- */
-    $('#dressSec').hidden = !WEDDING.dressCode.show;
-
     /* --- closing signature --- */
     var sign = t(WEDDING.closing.signature);
     if (!sign) {

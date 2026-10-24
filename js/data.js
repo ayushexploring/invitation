@@ -41,12 +41,11 @@ const WEDDING = {
   /* ---------- 4. THE BIG DATE ----------
      IMPORTANT: this ONE value drives the countdown timer.
      Format: YYYY-MM-DDTHH:MM:SS+05:30   (+05:30 = India Standard Time) */
-  weddingDateTime: "2026-12-04T18:00:00+05:30",
+  weddingDateTime: "2026-12-04T17:00:00+05:30",
 
   // How the date is spelled out on the page. Keep it in step with the above.
   weddingDateText: "December 4 & 5, 2026",
   weddingDayText:  "Friday & Saturday",
-  weddingTimeText: "Celebrations begin 6:00 PM",
 
   // Used for the "Save the Date" calendar file
   calendar: {
@@ -124,21 +123,6 @@ const WEDDING = {
     mapsLabel: "View on Google Maps"
   },
 
-  /* ---------- 10. SECTION: DRESS CODE ----------
-     Set  show: false  to hide this whole section. */
-  dressCode: {
-    show: true,
-    heading: "Dress Code",
-    women: {
-      label: "Women",
-      text:  "Elegant formal attire in pastel or jewel tones."
-    },
-    men: {
-      label: "Men",
-      text:  "Suit or traditional formal wear."
-    }
-  },
-
   /* ---------- 11. SECTION: PRE-WEDDING EVENTS ----------
      Delete entries from  items  or set  show: false  to hide. */
   events: {
@@ -147,7 +131,7 @@ const WEDDING = {
     items: [
       {
         title: "Engagement",
-        when:  "Dec 4, 2026 - 6:00 PM",
+        when:  "Dec 4, 2026 - 5:00 PM",
         where: "Naturoville Wellness Resort"
       },
       {
