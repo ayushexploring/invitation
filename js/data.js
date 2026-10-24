@@ -130,13 +130,8 @@ const WEDDING = {
     heading: "Pre-Wedding Events",
     items: [
       {
-        title: "Engagement",
+        title: "Engagement and Sangeet",
         when:  "Dec 4, 2026 - 5:00 PM",
-        where: "Naturoville Wellness Resort"
-      },
-      {
-        title: "Sangeet",
-        when:  "Dec 4, 2026 - 6:00 PM",
         where: "Naturoville Wellness Resort"
       }
     ]
