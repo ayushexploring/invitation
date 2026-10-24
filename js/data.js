@@ -119,6 +119,8 @@ const WEDDING = {
     address: "Dehradun Road,\nRishikesh, Uttarakhand",
     // Paste ANY Google Maps share link here
     mapsUrl:   "https://maps.google.com/?q=Naturoville+Wellness+Resort+Dehradun+Road+Rishikesh+Uttarakhand",
+    // Google Maps > Share > Embed a map: paste just the src="..." URL
+    mapsEmbed: "https://www.google.com/maps/embed?pb=!1m16!1m11!1m3!1d3!2d78.1666201!3d30.1156692!2m2!1f0!2f90!3m2!1i1024!2i768!4f75!3m3!1m2!1s0x39093bf76b9eb5b3%3A0x553f170729e3fc0d!2sNaturoville%20Wellness%20Resort!4v1792871216215",
     mapsLabel: "View on Google Maps"
   },
 

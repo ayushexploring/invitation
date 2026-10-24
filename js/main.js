@@ -55,6 +55,12 @@
       }
     }
 
+    var mapFrame = $('#venueMap');
+    if (mapFrame && WEDDING.venue.mapsEmbed) {
+      mapFrame.src = WEDDING.venue.mapsEmbed;
+      mapFrame.hidden = false;
+    }
+
     renderHeroImage();
     renderTimeline();
     renderEvents();

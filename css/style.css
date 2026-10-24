@@ -1146,3 +1146,13 @@ body.scrolled .scroll-cue{ opacity:0; transition-delay:0s }
   border-radius:10px;
   box-shadow:var(--shadow-soft);
 }
+
+.venue-map{
+  display:block;
+  width:min(84vw,320px); height:220px;
+  border:0;
+  margin:14px auto 4px;
+  border-radius:10px;
+  box-shadow:var(--shadow-soft);
+}
+.venue-map[hidden]{ display:none }
