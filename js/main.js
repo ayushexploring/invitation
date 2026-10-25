@@ -63,7 +63,6 @@
 
     renderHeroImage();
     renderTimeline();
-    renderEvents();
     renderGallery();
     renderInfo();
 
@@ -94,38 +93,21 @@
   function renderTimeline() {
     var list = $('#timelineList');
     list.innerHTML = '';
-    (WEDDING.timeline.items || []).forEach(function (it) {
-      var li = document.createElement('li');
-      li.innerHTML =
-        '<div class="tl-title"></div>' +
-        '<div class="tl-when"></div>' +
-        '<div class="tl-note"></div>';
-      $('.tl-title', li).textContent = t(it.title);
-      $('.tl-when',  li).textContent = t(it.when);
-      var note = t(it.note);
-      if (note) { $('.tl-note', li).textContent = note; }
-      else      { $('.tl-note', li).remove(); }
-      list.appendChild(li);
-    });
-  }
+    (WEDDING.timeline.days || []).forEach(function (day) {
+      var head = document.createElement('li');
+      head.className = 'tl-day';
+      head.textContent = t(day.date);
+      list.appendChild(head);
 
-  function renderEvents() {
-    var sec  = $('#eventsSec');
-    var list = $('#eventsList');
-    var items = WEDDING.events.items || [];
-    sec.hidden = !WEDDING.events.show || items.length === 0;
-    list.innerHTML = '';
-    items.forEach(function (ev) {
-      var div = document.createElement('div');
-      div.className = 'ev';
-      div.innerHTML =
-        '<div class="ev-title"></div>' +
-        '<div class="ev-when"></div>' +
-        '<div class="ev-where"></div>';
-      $('.ev-title', div).textContent = t(ev.title);
-      $('.ev-when',  div).textContent = t(ev.when);
-      $('.ev-where', div).textContent = t(ev.where);
-      list.appendChild(div);
+      (day.items || []).forEach(function (it) {
+        var li = document.createElement('li');
+        li.innerHTML = '<div class="tl-title"></div><div class="tl-note"></div>';
+        $('.tl-title', li).textContent = t(it.title) + (it.time ? ' - ' + t(it.time) : '');
+        var note = t(it.note);
+        if (note) { $('.tl-note', li).textContent = note; }
+        else      { $('.tl-note', li).remove(); }
+        list.appendChild(li);
+      });
     });
   }
 

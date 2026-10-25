@@ -878,6 +878,15 @@ body.opened .invite{ opacity:1 }
 .tl-when { font-size:12.5px; letter-spacing:.05em; color:var(--muted); margin-top:1px }
 .tl-note { font-size:13.5px; color:var(--muted); font-style:italic; margin-top:3px }
 
+/* Day headings sit on the line as a small pill instead of a dot */
+.timeline li.tl-day{
+  margin-left:-34px; padding:0 0 22px;
+  font-size:12px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--maroon);
+}
+.timeline li.tl-day::before{ display:none }
+.timeline li:not(.tl-day) + li.tl-day{ padding-top:14px }
+
 /* ============================================================
    10. VENUE
    ============================================================ */

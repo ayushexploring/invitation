@@ -41,7 +41,7 @@ const WEDDING = {
   /* ---------- 4. THE BIG DATE ----------
      IMPORTANT: this ONE value drives the countdown timer.
      Format: YYYY-MM-DDTHH:MM:SS+05:30   (+05:30 = India Standard Time) */
-  weddingDateTime: "2026-12-04T17:00:00+05:30",
+  weddingDateTime: "2026-12-04T18:00:00+05:30",
 
   // How the date is spelled out on the page. Keep it in step with the above.
   weddingDateText: "December 4 & 5, 2026",
@@ -97,16 +97,48 @@ const WEDDING = {
   /* ---------- 8. SECTION: PROGRAM TIMELINE ---------- */
   timeline: {
     heading: "Program Timeline",
-    items: [
+    /* One block per day. Each event shows as  "Title - time"  with its
+       note in italics underneath. */
+    days: [
       {
-        title: "Haldi",
-        when:  "Dec 5, 2026 - 9:00 AM",
-        note:  "Join us for a morning of turmeric, laughter and love."
+        date: "4 Dec 2026",
+        items: [
+          {
+            title: "Engagement",
+            time:  "6:00 PM",
+            note:  "Two hearts, one promise. Be there as the rings begin our forever."
+          },
+          {
+            title: "Sangeet",
+            time:  "7:00 PM",
+            note:  "An evening of music and dance. Bring your best moves and your loudest cheer."
+          },
+          {
+            title: "Mehndi",
+            time:  "8:00 PM",
+            note:  "Henna, laughter and old stories. Come add a little colour to our celebration."
+          }
+        ]
       },
       {
-        title: "Baarat",
-        when:  "Dec 5, 2026 - 6:00 PM",
-        note:  "Dance with us as the baarat arrives."
+        date: "5 Dec 2026",
+        items: [
+          {
+            title: "Haldi",
+            time:  "9:00 AM",
+            note:  "Join us for a morning of turmeric, laughter and love."
+          },
+          {
+            title: "Baarat",
+            time:  "6:00 PM",
+            note:  "Dance with us as the baarat arrives."
+          },
+          {
+            title: "Varmala",
+            time:  "7:00 PM",
+            note:  "As garlands are exchanged, two families become one. Shower us with your blessings."
+          }
+        ]
       }
     ]
   },
@@ -121,20 +153,6 @@ const WEDDING = {
     // Google Maps > Share > Embed a map: paste just the src="..." URL
     mapsEmbed: "https://www.google.com/maps/embed?pb=!1m16!1m11!1m3!1d3!2d78.1666201!3d30.1156692!2m2!1f0!2f90!3m2!1i1024!2i768!4f75!3m3!1m2!1s0x39093bf76b9eb5b3%3A0x553f170729e3fc0d!2sNaturoville%20Wellness%20Resort!4v1792871216215",
     mapsLabel: "View on Google Maps"
-  },
-
-  /* ---------- 11. SECTION: PRE-WEDDING EVENTS ----------
-     Delete entries from  items  or set  show: false  to hide. */
-  events: {
-    show: true,
-    heading: "Pre-Wedding Events",
-    items: [
-      {
-        title: "Engagement and Sangeet",
-        when:  "Dec 4, 2026 - 5:00 PM",
-        where: "Naturoville Wellness Resort"
-      }
-    ]
   },
 
   /* ---------- 12. SECTION: INFO CARDS ----------
