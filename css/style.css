@@ -878,14 +878,17 @@ body.opened .invite{ opacity:1 }
 .tl-when { font-size:12.5px; letter-spacing:.05em; color:var(--muted); margin-top:1px }
 .tl-note { font-size:13.5px; color:var(--muted); font-style:italic; margin-top:3px }
 
-/* Day headings sit on the line as a small pill instead of a dot */
+/* Day headings sit on the line as a filled maroon pill instead of a dot */
 .timeline li.tl-day{
-  margin-left:-34px; padding:0 0 22px;
-  font-size:12px; letter-spacing:.18em; text-transform:uppercase;
-  color:var(--maroon);
+  width:max-content;
+  margin:0 0 24px -34px; padding:7px 18px;
+  border-radius:999px;
+  background:var(--maroon); color:#fff;
+  font-size:15px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+  box-shadow:0 4px 14px rgba(139,30,45,.22);
 }
 .timeline li.tl-day::before{ display:none }
-.timeline li:not(.tl-day) + li.tl-day{ padding-top:14px }
+.timeline li:not(.tl-day) + li.tl-day{ margin-top:16px }
 
 /* ============================================================
    10. VENUE
