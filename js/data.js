@@ -16,13 +16,14 @@ const WEDDING = {
   },
 
   /* ---------- 2. THE OPENING SCREEN BACKGROUND ----------
-     Leave image as "" and the hero uses the built-in garden-at-dusk
-     gradient. To use your own photo instead, put it in assets/images/
+     Leave image as "" and the hero uses the built-in maroon-and-gold
+     background. To use your own photo instead, put it in assets/images/
      and set the path here, e.g. "assets/images/hero.jpg".
      Choose a DARK photo - the names are printed in white over it.
      Raise overlay (0 to 1) to darken a photo that is too bright. */
   hero: {
-    image:   "assets/images/hero.jpg",
+    // image: "assets/images/hero.jpg",   // couple photo, switched off for now
+    image:   "",
     overlay: 0.42
   },
 

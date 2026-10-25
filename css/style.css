@@ -594,23 +594,25 @@ body.opened .invite{ opacity:1 }
   overflow:hidden;
   isolation:isolate;
 }
-/* A garden gateway at dusk, built in layers: sky seen through an arch,
-   a warm glow on the horizon, and dark foliage closing in at the edges.
-   Swap the whole thing for a photo with:
-     background:url("../assets/images/hero.jpg") center/cover;   */
+/* A deep maroon backdrop in the site's own palette: a soft gold glow
+   behind the arch, a faint gold floral lattice, and darker wine at the
+   edges so the white names stay readable.
+   Swap the whole thing for a photo by setting  hero.image  in data.js. */
 .hero-bg{
   position:absolute; inset:0; z-index:-2;
   background:
-    /* dark foliage framing the edges */
+    /* darker wine closing in at the edges */
     radial-gradient(125% 80% at 50% 50%,
-      transparent 34%, rgba(38,22,26,.42) 68%, rgba(20,13,17,.90) 100%),
-    /* warm horizon glow, sitting inside the arch rather than under it */
-    radial-gradient(46% 26% at 50% 62%,
-      rgba(255,216,182,.38) 0%, rgba(236,158,120,.15) 46%, transparent 78%),
-    /* the sky itself */
-    radial-gradient(72% 54% at 50% 44%,
-      #85AACB 0%, #5379A0 26%, #325074 54%, #1F3049 80%, #141A28 100%);
-  /* a very slow drift keeps the scene from feeling like a flat image */
+      transparent 38%, rgba(40,8,16,.45) 70%, rgba(26,5,11,.88) 100%),
+    /* warm gold glow behind the arch */
+    radial-gradient(52% 34% at 50% 48%,
+      rgba(226,203,150,.30) 0%, rgba(195,160,90,.12) 50%, transparent 80%),
+    /* faint gold floral lattice */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23E2CB96' stroke-width='.8' opacity='.4'%3E%3Cpath d='M32 20c3 4 3 8 0 12c-3-4-3-8 0-12zM32 44c3-4 3-8 0-12c-3 4-3 8 0 12zM20 32c4-3 8-3 12 0c-4 3-8 3-12 0zM44 32c-4-3-8-3-12 0c4 3 8 3 12 0z'/%3E%3Ccircle cx='32' cy='32' r='1.6'/%3E%3Ccircle cx='0' cy='0' r='2'/%3E%3Ccircle cx='64' cy='0' r='2'/%3E%3Ccircle cx='0' cy='64' r='2'/%3E%3Ccircle cx='64' cy='64' r='2'/%3E%3C/g%3E%3C/svg%3E") center/64px 64px repeat,
+    /* the maroon base */
+    radial-gradient(80% 60% at 50% 45%,
+      #A8304A 0%, #8A1F35 30%, #6A1528 60%, #4A0E1C 85%, #330913 100%);
+/* a very slow drift keeps the scene from feeling like a flat image */
   animation:heroDrift 28s ease-in-out infinite alternate;
   will-change:transform;
 }
@@ -619,7 +621,7 @@ body.opened .invite{ opacity:1 }
   to  { transform:scale(1.12) translate3d(1%,-0.5%,0) }
 }
 
-/* warm bokeh lights among the foliage */
+/* warm gold sparkles drifting over the backdrop */
 .hero-bg::after{
   content:''; position:absolute; inset:-10%;
   background:
@@ -643,7 +645,7 @@ body.opened .invite{ opacity:1 }
   border-radius:999px 999px 18px 18px;
   background:linear-gradient(180deg, rgba(255,255,255,.14) 0%, rgba(255,255,255,.06) 60%, rgba(255,255,255,.02) 100%);
   border:1px solid rgba(255,255,255,.22);
-  box-shadow:0 0 60px rgba(120,160,210,.22), inset 0 0 40px rgba(255,255,255,.06);
+  box-shadow:0 0 60px rgba(226,203,150,.22), inset 0 0 40px rgba(255,255,255,.06);
   /* Frosted enough to keep the names legible over a real photo, but not
      so much that the couple becomes unrecognizable behind their own
      names - 8px keeps faces softly identifiable rather than dissolved. */
