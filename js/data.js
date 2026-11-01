@@ -113,11 +113,6 @@ const WEDDING = {
             title: "Sangeet",
             time:  "7:00 PM",
             note:  "An evening of music and dance. Bring your best moves and your loudest cheer."
-          },
-          {
-            title: "Mehndi",
-            time:  "8:00 PM",
-            note:  "Henna, laughter and old stories. Come add a little colour to our celebration."
           }
         ]
       },
@@ -157,11 +152,6 @@ const WEDDING = {
   /* ---------- 12. SECTION: INFO CARDS ----------
      Any card with  show: false  disappears from the page. */
   info: {
-    transportation: {
-      show: true,
-      heading: "Transportation",
-      text: "Our journey begins together! Transport for guests will leave from Samrat Apartment, Vasundhra Enclave on 4 Dec 2026 at 9:00 AM. Please be there a little early so we can set off on time."
-    },
     accommodation: {
       show: true,
       heading: "Accommodation",

@@ -152,13 +152,14 @@
   }
 
   function renderInfo() {
-    $('#cardTransport').hidden = !WEDDING.info.transportation.show;
-    $('#cardStay').hidden      = !WEDDING.info.accommodation.show;
-    $('#cardGifts').hidden     = !WEDDING.info.gifts.show;
+    /* a card deleted from data.js counts the same as show: false */
+    var info = WEDDING.info || {};
+    function on(key) { return !!(info[key] && info[key].show); }
+    $('#cardTransport').hidden = !on('transportation');
+    $('#cardStay').hidden      = !on('accommodation');
+    $('#cardGifts').hidden     = !on('gifts');
     $('#infoSec').hidden =
-      !WEDDING.info.transportation.show &&
-      !WEDDING.info.accommodation.show &&
-      !WEDDING.info.gifts.show;
+      !on('transportation') && !on('accommodation') && !on('gifts');
   }
 
 
