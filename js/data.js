@@ -177,8 +177,7 @@ const WEDDING = {
      Music starts when the guest taps the wax seal (browsers block
      autoplay before a tap, so this is the only reliable moment). */
   music: {
-    // Turn this on AFTER you have put an mp3 at the path below.
-    enabled: false,
+    enabled: true,
     src: "assets/audio/music.mp3",
     startMuted: false
   },
