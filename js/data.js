@@ -186,7 +186,7 @@ const WEDDING = {
   /* ---------- 15. FIXED UI LABELS ---------- */
   ui: {
     tapToOpen:     "Tap",
-    youAreInvited: "You Are Invited",
+    // youAreInvited: "You Are Invited",
     welcome:       "We are honored to invite you to\nthe wedding festivities of",
     scroll:        "Scroll",
     days:          "Days",
