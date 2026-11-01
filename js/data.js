@@ -187,7 +187,7 @@ const WEDDING = {
   ui: {
     tapToOpen:     "Tap",
     youAreInvited: "You Are Invited",
-    welcome:       "We are honored to welcome you to\nthe wedding ceremony of",
+    welcome:       "We are honored to invite you to\nthe wedding festivities of",
     scroll:        "Scroll",
     days:          "Days",
     hours:         "Hours",
